@@ -8,23 +8,23 @@ var data =
     [
         {
             label: "player1",
-            fillcolor: "rgba(0,100,100,0.5)",
-            strokecolor: "rgba(0,0,0,1)",
-            pointcolor: "rgba(100,100,100,1)",
-            pointstrokecolor: "#f00",
-            pointhighlightfill: "#fff",
-            pointhighlightstroke: "rgba(0,100,0,1)",
+            fillColor: "rgba(0,220,100,0.2)",
+            strokeColor: "rgba(0,220,100,1)",
+            pointColor: "rgba(100,100,100,1)",
+            pointstrokeColor: "#abc",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(0,100,0,1)",
             data: [1,2,3,3,3,4,4,5,5]
         },
         {
             label: "player2",
-            fillcolor: "rgba(100,100,0,0.5)",
-            strokecolor: "rgba(0,0,0,1)",
-            pointcolor: "rgba(100,100,100,1)",
-            pointstrokecolor: "#f00",
-            pointhighlightfill: "#fff",
-            pointhighlightstroke: "rgba(0,100,0,1)",
-            data: [1,2,3,3,3,4,4,5,5]
+            fillColor: "rgba(220,100,100,0.5)",
+            strokeColor: "rgba(0,0,0,1)",
+            pointColor: "rgba(100,100,100,1)",
+            pointstrokeColor: "#f00",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(0,100,0,1)",
+            data: [0,0,0,1,2,2,3,3,4]
         }
     ]
 }
