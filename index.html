@@ -1,10 +1,50 @@
 <html>
 <head>
-<script type="text/javascript" src="Chart.js"></script>
-<script type="text/javascript" src="scorehistory.js"></script>
+    <script type="text/javascript" src="Chart.js"></script>
+    <script type="text/javascript" src="scorehistory.js"></script>
+	<script type="text/javascript" src="winRecord.js"></script>
+	<script type="text/javascript">
+		function initPage() {
+			drawSet();
+			drawWins();
+		}
+	</script>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body onload="drawChart()">
-<canvas id="scoreHistory" width=800 height=200></canvas>
+<body onload="initPage()">
+<div id="mainView">
+	<div id="playerView" class="subcontainer">
+		<h1>Gregg's Overview</h1>
+		
+		<img id="profilePic" src="img/pong.jpg">
+		
+		<h2>Overall Record</h2>
+		<canvas id="winRecord"></canvas>
+		<h2>Set History</h2>
+		<div id="gameHistory">
+			<table>
+				<thead>
+					<tr><th>vs</th><th>Result</th></tr>
+				</thead>
+				<tbody>
+				<tr><td>Laurence</td><td>loss</td></tr>
+				<tr><td>Dain</td><td>loss</td></tr>
+				<tr><td>Sasha</td><td>win</td></tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div id="setView" class="subcontainer">
+	    <h1>Regulation Set 173 </h1>
+	    <h2>Game 1</h2><h3>21/11 Gregg</h3>
+	    <canvas id="game1"></canvas>
+	    <h2>Game 2</h2><h3>21/11 Gregg</h3>
+	    <canvas id="game2"></canvas>
+	    <h2>Game 3</h2><h3>Third game not required</h3>
+
+	</div>
+</div>
 </body>
 </html>
