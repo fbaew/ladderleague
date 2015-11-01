@@ -15,8 +15,29 @@
 
 <body onload="initPage()">
 <div id="mainView">
+	<div id="ladderView" class="subcontainer">
+		<h1>Leaders</h1>
+		<ol id="leaderboard" class="menu">
+			<li>Laurence</li>
+			<li>Gregg</li>
+			<li>Dain</li>
+			<li>Josie</li>
+			<li>Sasha</li>
+			<li>Dylan</li>
+			<li>Mark</li>
+			<li>Tim</li>
+			<li>Ciaran</li>
+		</ol>
+		<h1>Search</h1>
+		...no searching yet.
+		<h1>About</h1>
+		<ol class="menu">
+			<li>Ladder League</li>
+			<li>BitBucket</li>
+		</ol>
+	</div>
 	<div id="playerView" class="subcontainer">
-		<h1>Gregg's Overview</h1>
+		<h1>Gregg "The Sizzler" Lewis</h1>
 		
 		<img id="profilePic" src="img/pong.jpg">
 		
@@ -28,15 +49,7 @@
 			</div>
 			
 			<div class="legendItem">
-				<span class="legendColor color1"></span><span class="legendLabel color1">Regulation Sets</span>
-			</div>
-			
-			<div class="legendItem">
-				<span class="legendColor color1"></span><span class="legendLabel color1">Casual Sets</span>
-			</div>
-			
-			<div class="legendItem">
-				<span class="legendColor color1"></span><span class="legendLabel color1">All Sets</span>
+				<span class="legendColor color2"></span><span class="legendLabel color2">Casual Sets</span>
 			</div>
 			
 		</span>
@@ -62,7 +75,13 @@
 	    <canvas id="game1"></canvas>
 	    <h2>Game 2</h2><h3>21/11 Gregg</h3>
 	    <canvas id="game2"></canvas>
-	    <h2>Game 3</h2><h3>Third game not required</h3>
+	    <h2>Game 3</h2>
+		<div id="game3Score">
+			<span class="playerScore">
+				<p>Gregg</p>
+				<p>21</p>
+			</span>
+		</div>
 
 	</div>
 </div>

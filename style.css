@@ -1,15 +1,70 @@
+html,body {
+    padding:none;
+    margin:none;
+    font-family:'Roboto',sans-serif;
+}
+.subcontainer {
+    float:left;
+    padding:30px;
+    box-shadow: 10px 0px 5px #888888;
+    height:100%;
+}
+
+#ladderView {
+    padding:0px;
+    border-right:3px #000 solid;
+    height:100%;
+}
+#ladderView > h1 {
+    text-transform:uppercase;
+    font-size:30pt;
+    padding:0px 10px 0px 10px;
+    color:#fff;
+    background-color:#000;
+}
+
+.menu {
+    list-style:none;
+    text-align:right;
+    font-size:18pt;
+    padding-right:15px;
+}
+
+#leaderboard > li:nth-child(even) {
+
+}
+
+
+#playerView {
+    background-color:rgb(0,102,113);
+    color:#fff;
+    margin-top:0px;
+}
+
+#playerView > h1 {
+    font-size:18pt;
+    font-family:'Roboto', sans-serif;
+}
+
 #setView {
+    width:400px;
+}
 
-
+.legend {
+    display:flex;
 }
 
 .legendColor.color1 {
     background-color:#abcdef;
 }
-.legendLabel {
-    display:inline-block;    
-    margin-left:5px;
 
+.legendColor.color2 {
+    background-color:#cdefab;
+}
+
+
+.legendLabel {
+    margin-left:5px;
 }
 
 .legendColor {
@@ -20,8 +75,8 @@
 }
 
 .legendItem {
-    display:inline;
-    float:none;
+    display:flex;
+    height:50px;
 }
 
 canvas, .alert {
@@ -30,6 +85,7 @@ canvas, .alert {
     border:1px #000 solid;
     padding:10 10 10 10;
     font-weight:bold;
+    background-color:#fff;
 }
 
 .alert {
@@ -37,11 +93,6 @@ canvas, .alert {
     font-size:20pt;
 }
 
-#mainView > .subcontainer {
-    float:left;
-    width:400px;
-    padding:30px;
-}
 
 #gameHistory > table {
     width:100%;
@@ -49,6 +100,7 @@ canvas, .alert {
     border-collapse:collapse;
     border-spacing:0px;
     font-family: 'Roboto', sans-serif;
+    border:1px #000 solid;
 }
 
 #gameHistory > table > thead {
@@ -57,15 +109,24 @@ canvas, .alert {
 }
 
 #gameHistory > table > tbody {
-    background-color:#ffff9f;
+
 }
 
 #gameHistory > table > tbody > tr > td, #gameHistory > table > thead > tr > th {
     padding:5px 2px 5px 2px;
-    font-size:25pt;
-    border:1px #000 solid;
+    font-size:15pt;
+    border:none;
+}
+
+#gameHistory > table > tbody > tr:nth-child(even) {
+    background-color:#dde;
+}
+
+#gameHistory > table > tbody > tr:nth-child(odd) {
+    background-color:#eee;
 }
 
 #profilePic {
-    width: 100%;
+    width: 250px;
 }
+
