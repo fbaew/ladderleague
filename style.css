@@ -3,8 +3,29 @@
 
 }
 
+.legendColor.color1 {
+    background-color:#abcdef;
+}
+.legendLabel {
+    display:inline-block;    
+    margin-left:5px;
+
+}
+
+.legendColor {
+    width:20px;
+    height:20px;
+    border:1px #000 solid;
+    display:inline-block;
+}
+
+.legendItem {
+    display:inline;
+    float:none;
+}
+
 canvas, .alert {
-    width: 90%;
+    width: 89%;
     height:70px;
     border:1px #000 solid;
     padding:10 10 10 10;
@@ -27,6 +48,7 @@ canvas, .alert {
     text-align:center;
     border-collapse:collapse;
     border-spacing:0px;
+    font-family: 'Roboto', sans-serif;
 }
 
 #gameHistory > table > thead {
