@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='set',
             name='set_id',
-            field=models.IntegerField(serialize=False, primary_key=True, default='BUNK'),
+            field=models.IntegerField(serialize=False, primary_key=True, default=0),
         ),
     ]

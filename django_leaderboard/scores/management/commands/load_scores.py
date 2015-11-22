@@ -43,7 +43,7 @@ class Command(BaseCommand):
         game3 = self._getGame(row[7:9])
         games = [game1, game2, game3]
 
-        s = Set(player1=player1,player2=player2)
+        s = Set(player1=player1,player2=player2,setid=int(row[0]))
 
         s.game_count = 3
         if not game3:
