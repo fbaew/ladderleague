@@ -8,6 +8,9 @@ class Player(models.Model):
     last_name = models.CharField(max_length=200)
     handle = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.short_id
+
 class Set(models.Model):
     '''
     A series of games representing a challenge between two people.
