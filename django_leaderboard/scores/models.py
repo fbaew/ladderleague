@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Player(models.Model):
+    short_id = models.CharField(max_length=200, primary_key=True,default="CHUMP")
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     handle = models.CharField(max_length=200)
