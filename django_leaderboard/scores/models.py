@@ -15,7 +15,7 @@ class Set(models.Model):
     '''
     A series of games representing a challenge between two people.
     '''
-    set_count = models.IntegerField() 
+    game_count = models.IntegerField()
     player1 = models.ForeignKey(Player, related_name='player1')
     player2 = models.ForeignKey(Player, related_name='player2')
 
