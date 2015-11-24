@@ -20,6 +20,13 @@ class Set(models.Model):
     player1 = models.ForeignKey(Player, related_name='player1')
     player2 = models.ForeignKey(Player, related_name='player2')
 
+    def __str__(self):
+        combatants = self.player1.short_id + " vs. " + self.player2.short_id
+        games = " "
+        for game in self.game_set.all():
+            games += game.__str__() + " "
+        return combatants + games
+
 class Game(models.Model):
     '''
     Represents a single game (part of a larger set of
@@ -33,4 +40,5 @@ class Game(models.Model):
     player2_score = models.IntegerField()
     parent_set = models.ForeignKey(Set,null=True)
 
-   
+    def __str__(self):
+        return ("[" + str(self.player1_score) + " " + str(self.player2_score) + "]")
