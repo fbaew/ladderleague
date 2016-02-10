@@ -20,6 +20,10 @@
 	<div id="ladderView" class="subcontainer">
 		<h1>Leaders</h1>
 		<ol id="leaderboard" class="menu">
+            {% for player in leaders %}
+            <li>{{player.first_name}}</li>
+            {% endfor %}
+<!--
 			<li>Laurence</li>
 			<li>Gregg</li>
 			<li>Dain</li>
@@ -29,6 +33,7 @@
 			<li>Mark</li>
 			<li>Tim</li>
 			<li>Ciaran</li>
+-->
 		</ol>
 		<h1>Search</h1>
 		...no searching yet.
