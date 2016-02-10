@@ -38,7 +38,9 @@ class Set(models.Model):
         if p1_wins > p2_wins:
             return self.player1
         elif p2_wins > p1_wins:
-            return self.player2 
+            return self.player2
+        else:
+            return Player.objects.get(short_id="PUDDING")
 
 class Game(models.Model):
     '''

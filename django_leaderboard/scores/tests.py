@@ -66,3 +66,30 @@ class SetTestCase(TestCase):
             parent_set = test_set
         )
         self.assertTrue(test_set.winner() == self.gregg)
+
+    def test_draw(self):
+        Player.objects.create(
+            short_id="PUDDING",
+            first_name="Ms.",
+            last_name="Pudding"
+        )
+        test_set = Set.objects.create(
+            player1=self.gregg,
+            player2=self.opponent,
+            game_count = 2
+        )
+        game1 = Game.objects.create(
+            player1_score = 21,
+            player2_score = 15,
+            parent_set = test_set,
+        )
+        game2 = Game.objects.create(
+            player1_score = 21,
+            player2_score = 23,
+            parent_set = test_set
+        )
+        self.assertTrue(
+            test_set.winner() == Player.objects.get(short_id="PUDDING")
+        )
+
+
