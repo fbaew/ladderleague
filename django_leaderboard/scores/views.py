@@ -15,7 +15,7 @@ import random
 #     return HttpResponse(template.render(context))
 # 
 def leaders(request):
-    player_list = Player.objects.all()
+    player_list = Player.objects.order_by("-elo_rating")
     template = loader.get_template('scores/leaders.html')
 
     return HttpResponse(template.render({
@@ -24,7 +24,7 @@ def leaders(request):
 
 def index(request):
     
-    all_players = Player.objects.order_by("?")
+    all_players = Player.objects.order_by("-elo_rating")
     leaderboard_template = loader.get_template('scores/leaders.html')        
     leaderboard_html = leaderboard_template.render(
         {'leaders':all_players},
@@ -56,7 +56,7 @@ def player_summary(request,player_name):
         , request
     )
 
-    all_players = Player.objects.order_by("?")
+    all_players = Player.objects.order_by("-elo_rating")
     leaderboard_template = loader.get_template('scores/leaders.html')
     leaderboard_html = leaderboard_template.render(
         {'leaders':all_players},

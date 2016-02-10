@@ -7,6 +7,9 @@ class Player(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     handle = models.CharField(max_length=200)
+    regulation_wins = models.IntegerField()
+    regulation_losses = models.IntegerField()
+    elo_rating = models.FloatField()
 
     def __str__(self):
         return self.short_id
@@ -39,6 +42,20 @@ class Set(models.Model):
             return self.player1
         elif p2_wins > p1_wins:
             return self.player2
+        else:
+            return Player.objects.get(short_id="PUDDING")
+
+    def opponent(self,player):
+        """
+        Return the opposing player to a given player.
+        Give back our favorite cat if the given player was not in the game...!?
+
+        So lazy! 
+        """
+        if player == self.player1:
+            return self.player2
+        elif player == self.player2:
+            return self.player1
         else:
             return Player.objects.get(short_id="PUDDING")
 
