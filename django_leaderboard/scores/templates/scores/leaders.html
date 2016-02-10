@@ -1,1 +1,30 @@
-hi mom
+{% load staticfiles %}
+<html>
+<head>
+    <script type="text/javascript" src="{% static "scores/Chart.js" %}"></script>
+    <script type="text/javascript" src="{% static "scores/scorehistory.js" %}"></script>
+	<script type="text/javascript" src="{% static "scores/winRecord.js" %}"></script>
+	<script type="text/javascript">
+		function initPage() {
+			drawSet();
+			drawWins();
+		}
+	</script>
+    <link rel="stylesheet" type="text/css" href="{% static "scores/style.css" %}">
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Chango' rel='stylesheet' type='text/css'>
+</head>
+
+<body onload="initPage()">
+<div id="mainView">
+	<div id="ladderView" class="subcontainer">
+		<h1>Leaders</h1>
+		<ol id="leaderboard" class="menu">
+            {% for player in leaders %}
+            <li>{{player.first_name}}</li>
+            {% endfor %}
+		</ol>
+	</div>
+</div>
+</body>
+</html>
