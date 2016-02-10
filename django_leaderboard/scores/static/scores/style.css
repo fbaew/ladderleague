@@ -192,3 +192,12 @@ canvas, .alert {
 .gameView > h2 {
     text-align:left;
 }
+
+#leaderboard.menu > li > a, #leaderboard.menu > li > a:visited {
+    text-decoration:none;
+    color:black;
+}
+
+#leaderboard.menu > li > a:hover {
+    background-color:#ccc;
+}
