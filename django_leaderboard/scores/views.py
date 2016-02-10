@@ -39,18 +39,38 @@ def index(request):
 
 def player_summary(request,player_name):
     set_list_challenger = Set.objects.filter(
-        player1= Player.objects.get(short_id=player_name)
+        player1= Player.objects.get(short_id=player_name.upper())
     )
 
     set_list_challengee = Set.objects.filter(
-        player2 = Player.objects.get(short_id=player_name)
+        player2 = Player.objects.get(short_id=player_name.upper())
     )
-    template = loader.get_template('scores/player.html')
-    html = template.render(
+    player = Player.objects.get(short_id=player_name.upper())
+    profile_template = loader.get_template('scores/player.html')
+    profile_html = profile_template.render(
         {
             'challenger_sets':set_list_challenger,
             'challengee_sets':set_list_challengee,
+            'player':player,
         }
         , request
     )
-    return HttpResponse(html)
+
+    all_players = Player.objects.order_by("?")
+    leaderboard_template = loader.get_template('scores/leaders.html')
+    leaderboard_html = leaderboard_template.render(
+        {'leaders':all_players},
+        request
+    )
+
+
+    master_template = loader.get_template('scores/player_profile.html')
+    master_html = master_template.render(
+        {
+            'leaders':leaderboard_html,
+            'profile':profile_html
+        },
+        request
+    )
+
+    return HttpResponse(master_html)
