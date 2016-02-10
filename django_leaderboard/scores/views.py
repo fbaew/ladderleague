@@ -27,3 +27,14 @@ def index(request):
     template = loader.get_template('scores/index.html')
     html = template.render({'leaders':player_list},request)
     return HttpResponse(html)
+
+def player_summary(request,player_name):
+    set_list_challenger = Set.objects.filter(
+        player1= Player.objects.get(short_id=player_name)
+    )
+    template = loader.get_template('scores/player.html')
+    html = template.render(
+        {'challenger_sets':set_list_challenger}
+        , request
+    )
+    return HttpResponse(html)

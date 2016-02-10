@@ -15,8 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+import scores
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^main/', include('scores.urls')),
+    url(
+        r'^player/(?P<player_name>\w.*)$'
+        , scores.views.player_summary
+        , name='player_summary'
+        ),
 ]
