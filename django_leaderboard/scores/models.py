@@ -27,6 +27,19 @@ class Set(models.Model):
             games += game.__str__() + " "
         return combatants + games
 
+    def winner(self):
+        p1_wins = 0
+        p2_wins = 0
+        for game in self.game_set.all():
+            if game.player1_score > game.player2_score:
+               p1_wins += 1 
+            elif game.player1_score < game.player2_score:
+               p2_wins += 1
+        if p1_wins > p2_wins:
+            return self.player1
+        elif p2_wins > p1_wins:
+            return self.player2 
+
 class Game(models.Model):
     '''
     Represents a single game (part of a larger set of

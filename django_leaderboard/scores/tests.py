@@ -14,25 +14,22 @@ class SetTestCase(TestCase):
         """
         Configure some test players
         """
-        Player.objects.create(
+        self.gregg = Player.objects.create(
             short_id="GREGG"
             , first_name="Gregg"
             , last_name="Lewis"
         )
 
-        Player.objects.create(
+        self.opponent = Player.objects.create(
             short_id="ENEMY"
             , first_name="John"
             , last_name="Dixon"
         )
 
-    def test_two_game_outright_two_game_win(self):
-        gregg = Player.objects.get(short_id="GREGG")
-        opponent = Player.objects.get(short_id="ENEMY")
-
+    def test_outright_win(self):
         test_set = Set.objects.create(
-            player1=gregg,
-            player2=opponent,
+            player1=self.gregg,
+            player2=self.opponent,
             game_count = 2
         )
         game1 = Game.objects.create(
@@ -40,11 +37,32 @@ class SetTestCase(TestCase):
             player2_score = 15,
             parent_set = test_set,
         )
-
         game2 = Game.objects.create(
             player1_score = 21,
             player2_score = 3,
             parent_set = test_set
         )
+        self.assertTrue(test_set.winner() == self.gregg)
 
+    def test_contested_win(self):
+        test_set = Set.objects.create(
+            player1=self.gregg,
+            player2=self.opponent,
+            game_count = 3
+        )
+        game1 = Game.objects.create(
+            player1_score = 21,
+            player2_score = 15,
+            parent_set = test_set,
+        )
+        game2 = Game.objects.create(
+            player1_score = 21,
+            player2_score = 23,
+            parent_set = test_set
+        )
+        game3 = Game.objects.create(
+            player1_score = 21,
+            player2_score = 3,
+            parent_set = test_set
+        )
         self.assertTrue(test_set.winner() == self.gregg)
