@@ -32,9 +32,16 @@ def player_summary(request,player_name):
     set_list_challenger = Set.objects.filter(
         player1= Player.objects.get(short_id=player_name)
     )
+
+    set_list_challengee = Set.objects.filter(
+        player2 = Player.objects.get(short_id=player_name)
+    )
     template = loader.get_template('scores/player.html')
     html = template.render(
-        {'challenger_sets':set_list_challenger}
+        {
+            'challenger_sets':set_list_challenger,
+            'challengee_sets':set_list_challengee,
+        }
         , request
     )
     return HttpResponse(html)
