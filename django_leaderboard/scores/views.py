@@ -23,9 +23,18 @@ def leaders(request):
        }, request))
 
 def index(request):
-    player_list = Player.objects.order_by("?") #performance; only temporary
-    template = loader.get_template('scores/index.html')
-    html = template.render({'leaders':player_list},request)
+    
+    all_players = Player.objects.order_by("?")
+    leaderboard_template = loader.get_template('scores/leaders.html')        
+    leaderboard_html = leaderboard_template.render(
+        {'leaders':all_players},
+        request
+    )
+
+    master_template = loader.get_template('scores/index.html')
+    html = master_template.render(
+        {'leaders':leaderboard_html,},
+        request)
     return HttpResponse(html)
 
 def player_summary(request,player_name):

@@ -18,23 +18,7 @@
 <body onload="initPage()">
 <div id="mainView">
 	<div id="ladderView" class="subcontainer">
-		<h1>Leaders</h1>
-		<ol id="leaderboard" class="menu">
-            {% for player in leaders %}
-            <li><a href="../player/{{player.short_id}}">{{player.first_name}}</a></li>
-            {% endfor %}
-<!--
-			<li>Laurence</li>
-			<li>Gregg</li>
-			<li>Dain</li>
-			<li>Josie</li>
-			<li>Sasha</li>
-			<li>Dylan</li>
-			<li>Mark</li>
-			<li>Tim</li>
-			<li>Ciaran</li>
--->
-		</ol>
+        {{leaders}}
 		<h1>Search</h1>
 		...no searching yet.
 		<h1>About</h1>

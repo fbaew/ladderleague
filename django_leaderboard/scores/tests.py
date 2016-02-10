@@ -5,7 +5,7 @@ from scores.models import Set, Game, Player
 
 
 
-class SetTestCase(TestCase):
+class SetWinnerTestCase(TestCase):
     """
     Test that Set objects correctly calculate the winner
     """
