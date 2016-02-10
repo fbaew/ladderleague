@@ -5,10 +5,18 @@ from django.template import RequestContext, loader
 
 # Create your views here.
 
+# def leaders(request):
+#     player_list = Player.objects.all()
+#     template = loader.get_template('scores/index.html')
+#     context = RequestContext(request, {
+#         'players':player_list,
+#     })
+#     return HttpResponse(template.render(context))
+# 
 def leaders(request):
-    player_list = Player.objects.all()
-    template = loader.get_template('scores/index.html')
-    context = RequestContext(request, {
+     player_list = Player.objects.all()
+     template = loader.get_template('scores/index.html')
+
+     return HttpResponse(template.render({
         'players':player_list,
-    })
-    return HttpResponse(template.render(context))
+        },request))
