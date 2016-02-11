@@ -1,8 +1,10 @@
+"""
+Views for scoreboard app
+"""
 from django.shortcuts import render
 from django.http import HttpResponse
 from scores.models import Player, Game, Set
-from django.template import RequestContext, loader
-import random
+from django.template import loader
 
 # Create your views here.
 
@@ -13,19 +15,13 @@ import random
 #         'players':player_list,
 #     })
 #     return HttpResponse(template.render(context))
-# 
-def leaders(request):
-    player_list = Player.objects.order_by("-elo_rating")
-    template = loader.get_template('scores/leaders.html')
-
-    return HttpResponse(template.render({
-       'leaders':player_list,
-       }, request))
-
+#
 def index(request):
-    
+    """
+    Main index view; This will be the main landing page.
+    """
     all_players = Player.objects.order_by("-elo_rating")
-    leaderboard_template = loader.get_template('scores/leaders.html')        
+    leaderboard_template = loader.get_template('scores/leaders.html')
     leaderboard_html = leaderboard_template.render(
         {'leaders':all_players},
         request
@@ -37,13 +33,19 @@ def index(request):
         request)
     return HttpResponse(html)
 
-def player_summary(request,player_name):
+def player_summary(request, player_name):
+    """
+    Subview showing the player's details:
+        Profile pic
+        Overall record
+        Set History
+    """
     set_list_challenger = Set.objects.filter(
-        player1= Player.objects.get(short_id=player_name.upper())
+        player1=Player.objects.get(short_id=player_name.upper())
     )
 
     set_list_challengee = Set.objects.filter(
-        player2 = Player.objects.get(short_id=player_name.upper())
+        player2=Player.objects.get(short_id=player_name.upper())
     )
     player = Player.objects.get(short_id=player_name.upper())
     profile_template = loader.get_template('scores/player.html')
