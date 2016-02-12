@@ -15,9 +15,9 @@ class Player(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     handle = models.CharField(max_length=200)
-    regulation_wins = models.IntegerField()
-    regulation_losses = models.IntegerField()
-    elo_rating = models.FloatField()
+    regulation_wins = models.IntegerField(default=0)
+    regulation_losses = models.IntegerField(default=0)
+    elo_rating = models.FloatField(default=0)
 
     def __str__(self):
         return self.short_id

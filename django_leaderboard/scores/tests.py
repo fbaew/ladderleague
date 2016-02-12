@@ -16,14 +16,40 @@ class SetOutcomeTestCase(TestCase):
         """
         Configure test preconditions
         """
-        pass
+        self.gregg = Player.objects.create(
+            short_id="GREGG"
+            , first_name="Gregg"
+            , last_name="Lewis"
+        )
+
+        self.opponent = Player.objects.create(
+            short_id="ENEMY"
+            , first_name="John"
+            , last_name="Dixon"
+        )
+        self.test_set = Set.objects.create(
+            player1=self.gregg,
+            player2=self.opponent,
+            game_count=2
+        )
+
+        game1 = Game.objects.create(
+            player1_score=21,
+            player2_score=15,
+            parent_set=test_set,
+        )
+        game2 = Game.objects.create(
+            player1_score=21,
+            player2_score=3,
+            parent_set=self.test_set
+        )
+
 
     def test_player_is_winner(self):
         """
         If the given player won the set, return "draw"
         """
-        pass
-
+        
     def test_player_is_loser(self):
         """
         If the given player lost the set, return "loss"
