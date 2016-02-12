@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from scores.models import Player, Game, Set
 from django.template import loader
+from django.db.models import Q
 
 # Create your views here.
 
@@ -40,19 +41,17 @@ def player_summary(request, player_name):
         Overall record
         Set History
     """
-    set_list_challenger = Set.objects.filter(
-        player1=Player.objects.get(short_id=player_name.upper())
-    )
 
-    set_list_challengee = Set.objects.filter(
-        player2=Player.objects.get(short_id=player_name.upper())
-    )
+    set_list = Set.objects.filter(
+        Q(player1=Player.objects.get(short_id=player_name.upper())) |
+        Q(player2=Player.objects.get(short_id=player_name.upper()))
+    ).order_by('setid')
+
     player = Player.objects.get(short_id=player_name.upper())
     profile_template = loader.get_template('scores/player.html')
     profile_html = profile_template.render(
         {
-            'challenger_sets':set_list_challenger,
-            'challengee_sets':set_list_challengee,
+            'all_sets':set_list,
             'player':player,
         }
         , request

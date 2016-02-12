@@ -20,19 +20,12 @@
 		<div id="gameHistory">
 			<table>
 				<thead>
-					<tr><th>Date</th><th>vs</th><th>Result</th></tr>
+					<tr><th>Set ID</th><th>vs</th><th>Result</th></tr>
 				</thead>
 				<tbody>
-                {% if challenger_sets %}
-                {% for set in challenger_sets %}
-                <tr><td>date</td><td>{{set.player2.first_name}}</td><td>...</td></tr>
+                {% for set in all_sets %}
+                <tr><td>{{set.setid}}</td><td>{{set.player1.first_name}} vs. {{set.player2.first_name}}</td><td>...</td></tr>
                 {% endfor %}
-                {% endif %}
-                {% if challengee_sets %}
-                {% for set in challengee_sets %}
-                <tr><td>date</td><td>{{set.player1.first_name}}</td><td>...</td></tr>
-                {% endfor %}
-                {% endif %}
 				</tbody>
 			</table>
 		</div>
