@@ -14,6 +14,11 @@ Features
 ========
 * Load historical data from a csv (we keep score in a Google doc for now)
 * Calculate win/loss ratio for each player, display players in order of this value
+* View individual player profiles
+    * Show all sets the user has played in
+    * Show the outcome of those sets
+* View the details of a specific set
+    * Show the score for each game in the set
 
 Roadmap
 =======
