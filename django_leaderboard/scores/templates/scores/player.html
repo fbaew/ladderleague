@@ -1,4 +1,5 @@
 {% load staticfiles %}
+	<div id="playerView" class="subcontainer">
 		<h1>{{player.first_name}} {% if player.handle %}"{{player.handle}}"{% endif %} {{player.last_name}}</h1>
 		
 		<img id="profilePic" src="{% static "scores/img/pong.jpg" %}">
@@ -15,7 +16,6 @@
 			</div>
 			
 		</span>
-		<canvas id="winRecord"></canvas>
 		<h2>Set History</h2>
 		<div id="gameHistory">
 			<table>
@@ -24,8 +24,11 @@
 				</thead>
 				<tbody>
                 {% for set in all_sets %}
+                <a href="{{set.setid}}">
                 <tr><td>{{set.setid}}</td><td>{{set.player1.first_name}} vs. {{set.player2.first_name}}</td><td>...</td></tr>
+                </a>
                 {% endfor %}
 				</tbody>
 			</table>
 		</div>
+    </div>

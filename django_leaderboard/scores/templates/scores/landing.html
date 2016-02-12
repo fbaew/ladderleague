@@ -1,0 +1,42 @@
+{% load staticfiles %}
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static "scores/style.css" %}">
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Chango' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+<div id="mainView">
+	<div id="ladderView" class="subcontainer">
+        {{leaders}}
+		<h1>Search</h1>
+		...no searching yet.
+		<h1>About</h1>
+		<ol class="menu">
+			<li>Ladder League</li>
+			<li>BitBucket</li>
+		</ol>
+	</div>
+    {% if profile %}
+    <!-- inserting profile .... -->
+    {{profile}}
+    <!--end of inserted profile--> 
+    {% if single_set %}
+    {{single_set}}
+    {% endif %}
+    {% else %}
+    <div id="welcome" class="subcontainer">
+        <div>
+        <p>Hello, and welcome to the ladder league home page!</p>
+        <p>Here you will find scores and standings for
+           Gregg's House Table Tennis Ladder League! To get started,
+            just click on a name on the left!
+        </p>
+        </div>
+    </div>
+
+    {% endif %}
+</div>
+</body>
+</html>

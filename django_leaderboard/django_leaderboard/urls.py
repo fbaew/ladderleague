@@ -21,13 +21,13 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^main/', include('scores.urls')),
     url(
-        r'^player/(?P<player_name>\w.*)$'
-        , scores.views.player_overview
-        , name='player_overview'
-    ),
-    url(
         r'^player/(?P<player_name>\w.*)/(?P<set_number>\d.*)$',
         scores.views.set_overview,
         name="set_overview"
+    ),
+    url(
+        r'^player/(?P<player_name>\w.*)$'
+        , scores.views.player_overview
+        , name='player_overview'
     ),
 ]

@@ -52,20 +52,19 @@ def index(request):
     """
     all_players = Player.objects.order_by("-elo_rating")
 
-    master_template = loader.get_template('scores/index.html')
+    master_template = loader.get_template('scores/landing.html')
     html = master_template.render(
         {
             'leaders':_leaderboard_html(request),
         },
         request
     )
-
     return HttpResponse(html)
 
 
 def player_overview(request, player_name):
     if Player.objects.filter(short_id=player_name.upper()).exists():
-        master_template = loader.get_template('scores/player_profile.html')
+        master_template = loader.get_template('scores/landing.html')
         master_html = master_template.render(
             {
                 'leaders':_leaderboard_html(request),
@@ -82,5 +81,6 @@ def set_overview(request, player_name, set_number):
     """
     Show the details of a given set involving player_name
     """
-    pass
-    
+    return HttpResponse("Here is the set {} involving {}".format(
+        set_number, player_name
+    ))
