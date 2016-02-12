@@ -13,9 +13,11 @@
 					<tr><th>Set ID</th><th>vs</th><th>Result</th></tr>
 				</thead>
 				<tbody>
-                {% for set in all_sets %}
-                <tr onclick="document.location = '/player/{{set.player1.first_name}}/{{set.set_id}}'">
-                <td>{{set.set_id}}</td><td>{{set.player1.first_name}} vs. {{set.player2.first_name}}</td><td>...</td>
+                {% for result in results %}
+                <tr onclick="document.location = '/player/{{result.set.player1.first_name}}/{{result.set.set_id}}'">
+                <td>{{result.set.set_id}}</td>
+                <td>{{result.set.player1.first_name}} vs. {{result.set.player2.first_name}}</td>
+                <td>{{result.outcome}}</td>
                 </tr>
                 {% endfor %}
 				</tbody>

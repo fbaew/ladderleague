@@ -23,6 +23,11 @@ def _player_summary(request, player_name):
     ).order_by('set_id')
 
     results = [{}]
+
+    results = [ {
+        'set':x,
+        'outcome':x.outcome(Player.objects.get(short_id=player_name.upper()))
+    } for x in set_list]
     player = Player.objects.get(short_id=player_name.upper())
 
     player = Player.objects.get(short_id=player_name.upper())
