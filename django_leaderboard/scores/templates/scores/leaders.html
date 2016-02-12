@@ -2,6 +2,6 @@
 		<h1>Leaders</h1>
 		<ol id="leaderboard" class="menu">
             {% for player in leaders %}
-            <li><a href="../player/{{player.first_name}}">{{player.first_name}}</a></li>
+            <li><a href="/player/{{player.first_name}}">{{player.first_name}}</a></li>
             {% endfor %}
 		</ol>

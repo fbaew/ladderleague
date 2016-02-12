@@ -51,6 +51,7 @@ body {
     background: linear-gradient(bottom, #fff, #000B2D);
     color:#fff;
     margin-top:0px;
+    width:400;
 }
 
 #playerView {
@@ -58,7 +59,6 @@ body {
 }
 
 #welcome {
-    width:400px;
     text-align:left;
 }
 
@@ -209,11 +209,11 @@ canvas, .alert {
     text-align:left;
 }
 
-#leaderboard.menu > li > a, #leaderboard.menu > li > a:visited {
+li > a, li > a:visited {
     text-decoration:none;
     color:black;
 }
 
-#leaderboard.menu > li > a:hover {
+li > a:hover {
     background-color:#ccc;
 }

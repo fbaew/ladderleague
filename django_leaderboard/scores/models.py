@@ -27,7 +27,7 @@ class Set(models.Model):
     """
     A series of games representing a challenge between two people.
     """
-    setid = models.IntegerField(primary_key=True, default=0)
+    set_id = models.IntegerField(primary_key=True, default=0)
     game_count = models.IntegerField()
     player1 = models.ForeignKey(Player, related_name='player1')
     player2 = models.ForeignKey(Player, related_name='player2')
