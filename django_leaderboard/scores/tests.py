@@ -7,6 +7,40 @@ from scores.models import Set, Game, Player
 # Create your tests here.
 
 
+class SetOutcomeTestCase(TestCase):
+    """
+    Tests for the outcome() method, which should return "win",
+    "loss", or "draw" given a specific player.
+    """
+    def setUp(self):
+        """
+        Configure test preconditions
+        """
+        pass
+
+    def test_player_is_winner(self):
+        """
+        If the given player won the set, return "draw"
+        """
+        pass
+
+    def test_player_is_loser(self):
+        """
+        If the given player lost the set, return "loss"
+        """
+        pass
+
+    def test_no_winner(self):
+        """
+        If there was no winner, return "draw"
+        """
+        pass
+
+    def test_no_contest(self):
+        """
+        If the given player was not in this set, throw an exception.
+        """
+        pass
 
 class SetWinnerTestCase(TestCase):
     """

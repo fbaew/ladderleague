@@ -47,11 +47,22 @@ def player_summary(request, player_name):
         Q(player2=Player.objects.get(short_id=player_name.upper()))
     ).order_by('setid')
 
+    results = [{}]
+
+#    for single_set in set_list:
+#        result = {}
+#        result["outcome"] = "Draw"
+#        player_ci = player_name.upper()
+#        if single_set.winner() == Player.objects.get(short_id=player_ci):
+#            result["outcome"] = "Win"
+#        elif single_set.winner() == 
+
     player = Player.objects.get(short_id=player_name.upper())
     profile_template = loader.get_template('scores/player.html')
     profile_html = profile_template.render(
         {
             'all_sets':set_list,
+            'results':results,
             'player':player,
         }
         , request
