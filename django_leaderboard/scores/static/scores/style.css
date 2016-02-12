@@ -180,10 +180,13 @@ canvas, .alert {
 .playerScore > h1 {
     font-size:45;
     font-family: 'Chango', cursive;
+    display:inline;
 
 }
 
 .playerScore > h2 {
+    padding-bottom:0px;
+    margin-bottom:0px;
     font-size:15pt;
     text-align:left;
     text-transform:uppercase;
@@ -207,6 +210,10 @@ canvas, .alert {
 
 .gameView > h2 {
     text-align:left;
+}
+
+.gameView > div {
+    margin-bottom:10px;
 }
 
 li > a, li > a:visited {

@@ -1,15 +1,18 @@
 	<div id="setView" class="subcontainer">
 	    <h1>Regulation Set {{single_set.set_id}}</h1>
 
-		<div id="game3Score" class="gameView">
-	    <h2>Game 3</h2>
-			<div class="playerScore player1">
-				<h2>Gregg</h2>
-				<h1>21</h1>
-			</div>
-			<div class="playerScore player2">
-				<h2>Laurence</h2>
-				<h1>11</h1>
-			</div>
-		</div>
+        {% for game in games %}
+
+        <div id="game{{forloop.counter}}Score" class="gameView">
+        <h2>Game {{forloop.counter}}</h2>
+            <div class="playerScore player1">
+                <h2>{{single_set.player1.first_name}}</h2>
+                <h1>{{game.player1_score}}</h1>
+            </div>
+            <div class="playerScore player2">
+                <h2>{{single_set.player2.first_name}}</h2>
+                <h1>{{game.player2_score}}</h1>
+            </div>
+        </div>
+        {% endfor %}
 	</div>

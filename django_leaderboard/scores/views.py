@@ -46,6 +46,18 @@ def _leaderboard_html(request):
     )
     return leaderboard_html
 
+def _set_summary_html(request, requested_set):
+    set_summary_template = loader.get_template('scores/set.html')
+    set_summary_html = set_summary_template.render(
+        {
+            'single_set':requested_set,
+            'games':requested_set.game_set.all()
+        },
+        request
+    )
+    return set_summary_html
+
+
 def index(request):
     """
     Main index view; This will be the main landing page.
@@ -75,16 +87,6 @@ def player_overview(request, player_name):
         return HttpResponse(master_html)
     else:
         return HttpResponse("Sorry, no such player")
-
-def _set_summary_html(request, requested_set):
-    set_summary_template = loader.get_template('scores/set.html')
-    set_summary_html = set_summary_template.render(
-        {
-            'single_set':requested_set
-        },
-        request
-    )
-    return set_summary_html
 
 def set_overview(request, player_name, set_number):
     """
