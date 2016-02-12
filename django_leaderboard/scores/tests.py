@@ -3,6 +3,7 @@ Test suite for scores package
 """
 from django.test import TestCase
 from scores.models import Set, Game, Player
+from scores.exceptions import NonParticipantError, UndefinedOutcomeError
 
 # Create your tests here.
 
@@ -57,31 +58,6 @@ class SetOutcomeTestCase(TestCase):
         """
         self.assertTrue(self.test_set.outcome(self.opponent) == "loss")
 
-    def test_no_winner(self):
-        """
-        If there was no winner, return "draw"
-        """
-        draw_set = Set.objects.create(
-            player1=self.gregg,
-            player2=self.opponent,
-            game_count=2
-        )
-
-        game1 = Game.objects.create(
-            player1_score=21,
-            player2_score=15,
-            parent_set=draw_set,
-        )
-        game2 = Game.objects.create(
-            player1_score=15,
-            player2_score=21,
-            parent_set=draw_set
-        )
-
-        self.assertTrue(self.test_set.outcome(self.opponent) == "draw")
-        self.assertTrue(self.test_set.outcome(self.gregg) == "draw")
-
-
     def test_no_contest(self):
         """
         If the given player was not in this set, throw an exception.
@@ -91,9 +67,56 @@ class SetOutcomeTestCase(TestCase):
             first_name="Not",
             last_name="ARealPlayer"
         )
-        print("Intentionally raising a KeyError")
-        with self.assertRaises(KeyError):
+        with self.assertRaises(NonParticipantError):
             self.test_set.outcome(intruder)
+
+class SetOutcomeErrorTestCase(TestCase):
+    """
+    Test cases where a tied Set is required.
+    """
+    def setUp(self):
+        """
+        Configure test preconditions
+        """
+        self.gregg = Player.objects.create(
+            short_id="GREGG"
+            , first_name="Gregg"
+            , last_name="Lewis"
+        )
+
+        self.opponent = Player.objects.create(
+            short_id="ENEMY"
+            , first_name="John"
+            , last_name="Dixon"
+        )
+        self.test_set = Set.objects.create(
+            player1=self.gregg,
+            player2=self.opponent,
+            game_count=2
+        )
+
+    def test_no_winner(self):
+        """
+        If there was no winner, return "draw"
+        """
+
+        game1 = Game.objects.create(
+            player1_score=21,
+            player2_score=15,
+            parent_set=self.test_set,
+        )
+        game2 = Game.objects.create(
+            player1_score=15,
+            player2_score=21,
+            parent_set=self.test_set
+        )
+
+        self.assertTrue(self.test_set.outcome(self.opponent) == "draw")
+        self.assertTrue(self.test_set.outcome(self.gregg) == "draw")
+#
+        pass
+
+
 
 class SetWinnerTestCase(TestCase):
     """
@@ -172,11 +195,6 @@ class SetWinnerTestCase(TestCase):
         exception. We definitely SHOULDN'T fabricate a fake player with some
         kind of meta-significance... Yet, we are testing for exactly that.
         """
-        Player.objects.create(
-            short_id="PUDDING",
-            first_name="Ms.",
-            last_name="Pudding"
-        )
         test_set = Set.objects.create(
             player1=self.gregg,
             player2=self.opponent,
@@ -192,8 +210,6 @@ class SetWinnerTestCase(TestCase):
             player2_score=23,
             parent_set=test_set
         )
-        self.assertTrue(
-            test_set.winner() == Player.objects.get(short_id="PUDDING")
-        )
 
-
+        with self.assertRaises(UndefinedOutcomeError):
+            test_set.winner()

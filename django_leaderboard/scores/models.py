@@ -2,6 +2,7 @@
 Models for our scorekeeping app
 """
 from django.db import models
+from scores.exceptions import NonParticipantError, UndefinedOutcomeError
 
 # Create your models here.
 
@@ -54,7 +55,7 @@ class Set(models.Model):
         elif p2_wins > p1_wins:
             return self.player2
         else:
-            return Player.objects.get(short_id="PUDDING")
+           raise UndefinedOutcomeError 
 
     def outcome(self, player):
         """
@@ -65,7 +66,20 @@ class Set(models.Model):
             "draw"
         Raise an exception if the player did not participate in the set.
         """
-        raise KeyError
+        winner = None
+        try:
+            winner = self.winner()
+        except UndefinedOutcomeError:
+            return "draw"
+
+        if player != self.player1 and player != self.player2:
+            raise NonParticipantError
+
+        if winner == player:
+            return "win"
+        else:
+            return "loss"
+
 
     def opponent(self, player):
         """
@@ -79,7 +93,7 @@ class Set(models.Model):
         elif player == self.player2:
             return self.player1
         else:
-            return Player.objects.get(short_id="PUDDING")
+            raise KeyError
 
 class Game(models.Model):
     '''
