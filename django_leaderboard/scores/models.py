@@ -56,6 +56,17 @@ class Set(models.Model):
         else:
             return Player.objects.get(short_id="PUDDING")
 
+    def outcome(self, player):
+        """
+        Returns a string describing how this set went for the given player.
+        Possible returns:
+            "win"
+            "loss"
+            "draw"
+        Raise an exception if the player did not participate in the set.
+        """
+        raise KeyError
+
     def opponent(self, player):
         """
         Return the opposing player to a given player.

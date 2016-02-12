@@ -36,7 +36,7 @@ class SetOutcomeTestCase(TestCase):
         game1 = Game.objects.create(
             player1_score=21,
             player2_score=15,
-            parent_set=test_set,
+            parent_set=self.test_set,
         )
         game2 = Game.objects.create(
             player1_score=21,
@@ -49,24 +49,51 @@ class SetOutcomeTestCase(TestCase):
         """
         If the given player won the set, return "draw"
         """
+        self.assertTrue(self.test_set.outcome(self.gregg) == "win")
         
     def test_player_is_loser(self):
         """
         If the given player lost the set, return "loss"
         """
-        pass
+        self.assertTrue(self.test_set.outcome(self.opponent) == "loss")
 
     def test_no_winner(self):
         """
         If there was no winner, return "draw"
         """
-        pass
+        draw_set = Set.objects.create(
+            player1=self.gregg,
+            player2=self.opponent,
+            game_count=2
+        )
+
+        game1 = Game.objects.create(
+            player1_score=21,
+            player2_score=15,
+            parent_set=draw_set,
+        )
+        game2 = Game.objects.create(
+            player1_score=15,
+            player2_score=21,
+            parent_set=draw_set
+        )
+
+        self.assertTrue(self.test_set.outcome(self.opponent) == "draw")
+        self.assertTrue(self.test_set.outcome(self.gregg) == "draw")
+
 
     def test_no_contest(self):
         """
         If the given player was not in this set, throw an exception.
         """
-        pass
+        intruder = Player.objects.create(
+            short_id="INTRUDER",
+            first_name="Not",
+            last_name="ARealPlayer"
+        )
+        print("Intentionally raising a KeyError")
+        with self.assertRaises(KeyError):
+            self.test_set.outcome(intruder)
 
 class SetWinnerTestCase(TestCase):
     """
