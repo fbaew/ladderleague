@@ -22,7 +22,12 @@ urlpatterns = [
     url(r'^main/', include('scores.urls')),
     url(
         r'^player/(?P<player_name>\w.*)$'
-        , scores.views.player_summary
-        , name='player_summary'
-        ),
+        , scores.views.player_overview
+        , name='player_overview'
+    ),
+    url(
+        r'^player/(?P<player_name>\w.*)/(?P<set_number>\d.*)$',
+        scores.views.set_overview,
+        name="set_overview"
+    ),
 ]

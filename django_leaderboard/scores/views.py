@@ -9,32 +9,7 @@ from django.db.models import Q
 
 # Create your views here.
 
-# def leaders(request):
-#     player_list = Player.objects.all()
-#     template = loader.get_template('scores/index.html')
-#     context = RequestContext(request, {
-#         'players':player_list,
-#     })
-#     return HttpResponse(template.render(context))
-#
-def index(request):
-    """
-    Main index view; This will be the main landing page.
-    """
-    all_players = Player.objects.order_by("-elo_rating")
-    leaderboard_template = loader.get_template('scores/leaders.html')
-    leaderboard_html = leaderboard_template.render(
-        {'leaders':all_players},
-        request
-    )
-
-    master_template = loader.get_template('scores/index.html')
-    html = master_template.render(
-        {'leaders':leaderboard_html,},
-        request)
-    return HttpResponse(html)
-
-def player_summary(request, player_name):
+def _player_summary(request, player_name):
     """
     Subview showing the player's details:
         Profile pic
@@ -48,14 +23,7 @@ def player_summary(request, player_name):
     ).order_by('setid')
 
     results = [{}]
-
-#    for single_set in set_list:
-#        result = {}
-#        result["outcome"] = "Draw"
-#        player_ci = player_name.upper()
-#        if single_set.winner() == Player.objects.get(short_id=player_ci):
-#            result["outcome"] = "Win"
-#        elif single_set.winner() == 
+    player = Player.objects.get(short_id=player_name.upper())
 
     player = Player.objects.get(short_id=player_name.upper())
     profile_template = loader.get_template('scores/player.html')
@@ -67,22 +35,52 @@ def player_summary(request, player_name):
         }
         , request
     )
+    return profile_html
 
+def _leaderboard_html(request):
     all_players = Player.objects.order_by("-elo_rating")
     leaderboard_template = loader.get_template('scores/leaders.html')
     leaderboard_html = leaderboard_template.render(
         {'leaders':all_players},
         request
     )
+    return leaderboard_html
 
+def index(request):
+    """
+    Main index view; This will be the main landing page.
+    """
+    all_players = Player.objects.order_by("-elo_rating")
 
-    master_template = loader.get_template('scores/player_profile.html')
-    master_html = master_template.render(
+    master_template = loader.get_template('scores/index.html')
+    html = master_template.render(
         {
-            'leaders':leaderboard_html,
-            'profile':profile_html
+            'leaders':_leaderboard_html(request),
         },
         request
     )
 
-    return HttpResponse(master_html)
+    return HttpResponse(html)
+
+
+def player_overview(request, player_name):
+    if Player.objects.filter(short_id=player_name.upper()).exists():
+        master_template = loader.get_template('scores/player_profile.html')
+        master_html = master_template.render(
+            {
+                'leaders':_leaderboard_html(request),
+                'profile':_player_summary(request, player_name)
+            },
+            request
+        )
+        return HttpResponse(master_html)
+    else:
+        return HttpResponse("Sorry, no such player")
+
+
+def set_overview(request, player_name, set_number):
+    """
+    Show the details of a given set involving player_name
+    """
+    pass
+    

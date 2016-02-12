@@ -27,66 +27,16 @@
 			<li>BitBucket</li>
 		</ol>
 	</div>
-	<div id="playerView" class="subcontainer">
-		<h1>Gregg "The Sizzler" Lewis</h1>
-		
-		<img id="profilePic" src="{% static "scores/img/pong.jpg" %}">
-		
-		<h2>Overall Record</h2>
-		<span class="legend">
-			
-			<div class="legendItem">
-				<span class="legendColor color1"></span><span class="legendLabel color1">Regulation Games</span>
-			</div>
-			
-			<div class="legendItem">
-				<span class="legendColor color2"></span><span class="legendLabel color2">Casual Sets</span>
-			</div>
-			
-		</span>
-		<canvas id="winRecord"></canvas>
-		<h2>Set History</h2>
-		<div id="gameHistory">
-			<table>
-				<thead>
-					<tr><th>Date</th><th>vs</th><th>Result</th></tr>
-				</thead>
-				<tbody>
-				<tr><td>10/12/15</td><td>Laurence</td><td>loss</td></tr>
-				<tr><td>10/12/15</td><td>Dain</td><td>loss</td></tr>
-				<tr><td>10/12/15</td><td>Sasha</td><td>win</td></tr>
-				</tbody>
-			</table>
-		</div>
+	<div id="welcome" class="subcontainer">
+        <div>
+        <p>Hello, and welcome to the ladder league home page!</p>
+        <p>Here you will find scores and standings for 
+           Gregg's House Table Tennis Ladder League! To get started,
+            just click on a name on the left!
+        </p>
+        </div>
 	</div>
 
-	<div id="setView" class="subcontainer">
-	    <h1>Regulation Set 173 </h1>
-
-		<div class="gameView">
-		    <h2>Game 1</h2><h3>21/11 Gregg</h3>
-		    <canvas id="game1"></canvas>
-		</div>
-
-		<div class="gameView">
-		    <h2>Game 2</h2><h3>21/11 Gregg</h3>
-		    <canvas id="game2"></canvas>
-		</div>
-		
-		<div id="game3Score" class="gameView">
-	    <h2>Game 3</h2>
-			<div class="playerScore player1">
-				<h2>Gregg</h2>
-				<h1>21</h1>
-			</div>
-			<div class="playerScore player2">
-				<h2>Laurence</h2>
-				<h1>11</h1>
-			</div>
-		</div>
-
-
-	</div>
 </div>
 </body>
 </html>

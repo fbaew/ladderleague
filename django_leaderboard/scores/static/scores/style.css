@@ -46,15 +46,31 @@ body {
 }
 
 
-#playerView {
+#playerView, #welcome {
     background: -moz-linear-gradient(bottom, #fff, #000B2D);
     background: linear-gradient(bottom, #fff, #000B2D);
     color:#fff;
     margin-top:0px;
+}
+
+#playerView {
     text-align:center;
 }
 
-#playerView > h1 {
+#welcome {
+    width:400px;
+    text-align:left;
+}
+
+#welcome > div {
+    background-color:#fff;
+    color:#000;
+    border:1px #000 solid;
+    padding:5px;
+    border-radius: 20px;
+}
+
+#playerView > h1, #welcome > h1 {
     font-size:18pt;
     font-family:'Roboto', sans-serif;
 }
