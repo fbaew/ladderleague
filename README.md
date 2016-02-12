@@ -13,7 +13,7 @@ each player ranks on the overall ladder.
 Features
 ========
 * Load historical data from a csv (we keep score in a Google doc for now)
-* Display a random leaderboard
+* Calculate win/loss ratio for each player, display players in order of this value
 
 Roadmap
 =======
