@@ -29,6 +29,8 @@ class Command(BaseCommand):
                 pass
 
         for player in Player.objects.all():
-            player.elo_rating = \
-                (player.regulation_wins+1.0)/(player.regulation_losses+1.0)
+            player.elo_rating = round( 
+                (player.regulation_wins+1.0)/(player.regulation_losses+1.0),
+                2
+            )
             player.save()

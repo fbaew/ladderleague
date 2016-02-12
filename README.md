@@ -25,7 +25,6 @@ Roadmap
 * Online score entry
 * Challenge Scheduling
 * Email integration
-* Player Profiles
 
 After an initial free-for-all seeding period, regulation games will be 
 restricted to official ladder league challenge rules, those being:

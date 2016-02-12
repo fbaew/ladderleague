@@ -221,6 +221,12 @@ li > a, li > a:visited {
     color:black;
 }
 
+#gameHistory > table > tbody > tr:hover {
+    background-color:#FC0;
+}
+
+
+
 li > a:hover {
     background-color:#ccc;
 }
