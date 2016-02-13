@@ -13,20 +13,50 @@ div#content {
     width:20%;
     border-right:1px #000 solid;
     height:100%;
+    padding:0;
+    margin:0;
 }
 
 #content {
     float:left;
     width:79%;
     height:100%;
+    background-color:#abcdef;
+}
+
+#standings {
+    background-color:#2b3725;
+    height:955555%;
+    color:#ccc;
+    font-family:'Roboto',sans-serif;
+}
+#standings h2 {
+    margin:0;
+    padding:0 5px 0 0;
+}
+#standings ol {
+    margin:0;
+    padding:5px 13px 5px 0;
+    width:100%;
+    text-align:right;
+    font-size:16pt;
+    list-style:none;
 }
 
 #titlebar {
-    font-size:28pt;
+    font-size:18pt;
     text-align:center;
 }
 
 #supermenu, #titlebar {
-    height:50px;
     border-bottom:1px #000 solid;
+    height:5%;
+}
+
+.nav-trail {
+    list-style:none;
+}
+
+.nav-trail li {
+    float:left;
 }
