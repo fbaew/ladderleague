@@ -213,3 +213,8 @@ class SetWinnerTestCase(TestCase):
 
         with self.assertRaises(UndefinedOutcomeError):
             test_set.winner()
+
+class BulkJobTestCase(TestCase):
+    """
+    Tests to make sure we create objects like we think we will
+    """
