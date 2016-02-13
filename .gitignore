@@ -1,3 +1,4 @@
 env/
 *.pyc
 *.swp
+django_leaderboard/django_leaderboard/settings.py

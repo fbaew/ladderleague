@@ -19,6 +19,10 @@ body {
     height:95%;
 }
 
+#content {
+    width:80%;
+}
+
 #standings {
     background-color:#061b26;
     width:20%;
@@ -109,4 +113,8 @@ body {
 #set span {
     padding:30px;
     font-size:18pt;
+}
+
+#notice {
+    margin:20px;
 }
