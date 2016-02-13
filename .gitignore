@@ -3,3 +3,4 @@ env/
 *.swp
 django_leaderboard/django_leaderboard/settings.py
 __pycache__/
+db.sqlite3
