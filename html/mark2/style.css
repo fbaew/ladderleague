@@ -1,0 +1,32 @@
+body {
+    background-color:#fff;
+    padding:0;
+    margin:0;
+}
+
+div#content {
+
+}
+
+#menus {
+    float:left;
+    width:20%;
+    border-right:1px #000 solid;
+    height:100%;
+}
+
+#content {
+    float:left;
+    width:79%;
+    height:100%;
+}
+
+#titlebar {
+    font-size:28pt;
+    text-align:center;
+}
+
+#supermenu, #titlebar {
+    height:50px;
+    border-bottom:1px #000 solid;
+}
