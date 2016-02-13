@@ -80,6 +80,7 @@ body {
 #player .vital-stats {
     float:left;
     text-align:center;
+    font-size:11pt;
 }
 
 #player .vital-stats td {

@@ -19,6 +19,10 @@ class Player(models.Model):
     regulation_wins = models.IntegerField(default=0)
     regulation_losses = models.IntegerField(default=0)
     elo_rating = models.FloatField(default=0)
+    hometown = models.CharField(
+        max_length=100,
+        default="Parts Unknown, Planet Earth"
+    )
 
     def __str__(self):
         return self.short_id

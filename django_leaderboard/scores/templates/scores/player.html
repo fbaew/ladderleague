@@ -4,7 +4,7 @@
         <img src="{% static "scores/img/pong.jpg" %}" class="profilepic">
         <table class="vital-stats">
             <tbody>
-                <tr><td>Hometown:</td><td>Calgary, AB, Canada</td></tr>
+                <tr><td>Hometown:</td><td>{{player.hometown}}</td></tr>
                 <tr><td>Wins:</td><td>{{wins}}</td></tr>
                 <tr><td>Ladder Rating:</td><td>{{player.elo_rating}}</td></tr>
                 <tr><td>Ladder Position:</td><td>{{ranking}}</td></tr>
