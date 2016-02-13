@@ -30,6 +30,9 @@ def _player_summary(request, player_name):
     } for x in set_list]
     player = Player.objects.get(short_id=player_name.upper())
 
+    standings = Player.objects.order_by("-elo_rating")
+    ranking = list(standings).index(player) + 1
+
     player = Player.objects.get(short_id=player_name.upper())
     profile_template = loader.get_template('scores/player.html')
     profile_html = profile_template.render(
@@ -37,6 +40,7 @@ def _player_summary(request, player_name):
             'all_sets':set_list,
             'results':results,
             'player':player,
+            'ranking':ranking,
         }
         , request
     )
