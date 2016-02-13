@@ -19,7 +19,7 @@ import scores
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^main/', include('scores.urls')),
+    url(r'^', include('scores.urls')),
     url(
         r'^player/(?P<player_name>\w.*)/(?P<set_number>\d.*)$',
         scores.views.set_overview,
