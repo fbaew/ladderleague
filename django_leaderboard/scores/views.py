@@ -28,10 +28,16 @@ def _player_summary(request, player_name):
         'set':x,
         'outcome':x.outcome(Player.objects.get(short_id=player_name.upper()))
     } for x in set_list]
+
+    wins = 0
+    for result in results:
+        if result["outcome"] == "win":
+            wins += 1
     player = Player.objects.get(short_id=player_name.upper())
 
     standings = Player.objects.order_by("-elo_rating")
     ranking = list(standings).index(player) + 1
+
 
     player = Player.objects.get(short_id=player_name.upper())
     profile_template = loader.get_template('scores/player.html')
@@ -41,6 +47,7 @@ def _player_summary(request, player_name):
             'results':results,
             'player':player,
             'ranking':ranking,
+            'wins':wins,
         }
         , request
     )
