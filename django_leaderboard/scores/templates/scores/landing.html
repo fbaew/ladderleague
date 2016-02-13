@@ -1,41 +1,36 @@
 {% load staticfiles %}
+
+
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="{% static "scores/style.css" %}">
-	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Chango' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static "scores/style.css" %}">
+    <title>Ladder League</title>
 </head>
 
 <body>
-<div id="mainView">
-	<div id="ladderView" class="subcontainer">
-        {{leaders}}
-		<h1>About</h1>
-		<ol class="menu">
-			<li><a href="/main">Ladder League</a></li>
-			<li><a href="http://github.com/fbaew/ladderleague">GitHub</a></li>
-		</ol>
-	</div>
+
+<div id="titlebar">Ladder League</div>
+
+{{leaders}}
+
+
+
+<div id="content">
+
+
     {% if profile %}
-    <!-- inserting profile .... -->
+    <!--inserting profile-->
     {{profile}}
-    <!--end of inserted profile--> 
+
     {% if single_set %}
     {{single_set}}
     {% endif %}
     {% else %}
-    <div id="welcome" class="subcontainer">
-        <div>
-        <div style="font-weight:bold">16/11/02</div>
-        <p>Hello, and welcome to the ladder league home page!</p>
-        <p>Here you will find scores and standings for
-           Gregg's House Table Tennis Ladder League! To get started,
-            just click on a name on the left!
-        </p>
-        </div>
-    </div>
-
+    give some kind of message here
     {% endif %}
+
 </div>
 </body>
+
 </html>

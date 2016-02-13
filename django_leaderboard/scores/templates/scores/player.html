@@ -1,26 +1,33 @@
 {% load staticfiles %}
-	<div id="playerView" class="subcontainer">
-		<h1>{{player.first_name}} {% if player.handle %}"{{player.handle}}"{% endif %} {{player.last_name}}</h1>
-		
-		<img id="profilePic" src="{% static "scores/img/pong.jpg" %}">
-		
-		<h2>Ladder Rating</h2>
-        <h3>{{player.elo_rating}}</h3>
-		<h2>Set History</h2>
-		<div id="gameHistory">
-			<table>
-				<thead>
-					<tr><th>Set ID</th><th>vs</th><th>Result</th></tr>
-				</thead>
-				<tbody>
-                {% for result in results %}
+    <div id="player">
+        <h1>{{player.first_name}} {% if player.handle %}"{{player.handle}}"{% endif %} {{player.last_name}}</h1>
+        <img src="{% static "scores/img/pong.jpg" %}" class="profilepic">
+        <table class="vital-stats">
+            <tbody>
+                <tr><td>Hometown:</td><td>Calgary, AB, Canada</td></tr>
+                <tr><td>Wins:</td><td>5</td></tr>
+                <tr><td>Ladder Rating:</td><td>{{player.elo_rating}}</td></tr>
+                <tr><td>Ladder Position:</td><td>5th</td></tr>
+
+            </tbody>
+        </table>
+
+        <h2>Play History</h2>
+
+        <table class="history">
+        <thead>
+            <tr><th>Set #</th><th>Matchup</th><th>Outcome</th></tr>
+        </thead>
+        <tbody>
+
+        {% for result in results %}
                 <tr onclick="document.location = '/player/{{result.set.player1.first_name}}/{{result.set.set_id}}'">
                 <td>{{result.set.set_id}}</td>
                 <td>{{result.set.player1.first_name}} vs. {{result.set.player2.first_name}}</td>
                 <td>{{result.outcome}}</td>
                 </tr>
-                {% endfor %}
-				</tbody>
-			</table>
-		</div>
+        {% endfor %}
+        </tbody>
+        </table>
     </div>
+
