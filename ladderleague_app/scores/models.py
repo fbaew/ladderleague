@@ -29,10 +29,11 @@ class Contest(models.Model):
     contest_id = models.IntegerField(primary_key=True)
     challenger = models.ForeignKey(Player, related_name='challenger_set')
     challengee = models.ForeignKey(Player, related_name='challengee_set')
+    game_count = models.IntegerField(null=False)
 
     def __str__(self):
         """Describe the matchup."""
-        return "{} vs {}".format(challenger, chalengee)
+        return "{} vs {}".format(self.challenger, self.challengee)
 
 class Game(models.Model):
     """Represent a single game (part of a larger Contest)"""

@@ -2,13 +2,13 @@
 Test suite for scores package
 """
 from django.test import TestCase
-from scores.models import Set, Game, Player
+from scores.models import Contest, Game, Player
 from scores.exceptions import NonParticipantError, UndefinedOutcomeError
 
 # Create your tests here.
 
 
-class SetOutcomeTestCase(TestCase):
+class ContestOutcomeTestCase(TestCase):
     """
     Tests for the outcome() method, which should return "win",
     "loss", or "draw" given a specific player.
@@ -28,9 +28,9 @@ class SetOutcomeTestCase(TestCase):
             , first_name="John"
             , last_name="Dixon"
         )
-        self.test_set = Set.objects.create(
-            player1=self.gregg,
-            player2=self.opponent,
+        self.test_set = Contest.objects.create(
+            challenger=self.gregg,
+            challengee=self.opponent,
             game_count=2
         )
 
@@ -70,9 +70,9 @@ class SetOutcomeTestCase(TestCase):
         with self.assertRaises(NonParticipantError):
             self.test_set.outcome(intruder)
 
-class SetOutcomeErrorTestCase(TestCase):
+class ContestOutcomeErrorTestCase(TestCase):
     """
-    Test cases where a tied Set is required.
+    Test cases where a tied Contest is required.
     """
     def setUp(self):
         """
@@ -89,9 +89,9 @@ class SetOutcomeErrorTestCase(TestCase):
             , first_name="John"
             , last_name="Dixon"
         )
-        self.test_set = Set.objects.create(
-            player1=self.gregg,
-            player2=self.opponent,
+        self.test_set = Contest.objects.create(
+            challenger=self.gregg,
+            challengee=self.opponent,
             game_count=2
         )
 
@@ -118,9 +118,9 @@ class SetOutcomeErrorTestCase(TestCase):
 
 
 
-class SetWinnerTestCase(TestCase):
+class ContestWinnerTestCase(TestCase):
     """
-    Test that Set objects correctly calculate the winner
+    Test that Contest objects correctly calculate the winner.
     """
 
     def setUp(self):
@@ -141,12 +141,12 @@ class SetWinnerTestCase(TestCase):
 
     def test_outright_win(self):
         """
-        See that Set.winner() returns the expected winner when
+        See that Contest.winner() returns the expected winner when
         the set is made up of 2 games
         """
-        test_set = Set.objects.create(
-            player1=self.gregg,
-            player2=self.opponent,
+        test_set = Contest.objects.create(
+            challenger=self.gregg,
+            challengee=self.opponent,
             game_count=2
         )
         game1 = Game.objects.create(
