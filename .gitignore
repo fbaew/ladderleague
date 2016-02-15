@@ -2,7 +2,7 @@ env/
 **/*.pyc
 **/*.swp
 django_leaderboard/django_leaderboard/settings.py
-ladderleage_app/ladderleage_app/settings.py
+ladderleague_app/ladderleague_app/settings.py
 **/__pycache__/
 db.sqlite3
 **/.__pycache__/
