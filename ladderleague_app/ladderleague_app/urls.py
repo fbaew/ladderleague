@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from scores import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^debug/players/', views.player_list, name="players"),
 ]
