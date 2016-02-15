@@ -27,8 +27,8 @@ class Command(BaseCommand):
             return None
         else:
             game = Game()
-            game.player1_score = scores[0]
-            game.player2_score = scores[1]
+            game.challenger_score = scores[0]
+            game.challengee_score = scores[1]
             return game
 
         print("Got scores: {}... {}".format(scores,scores == ['','']))
@@ -60,7 +60,7 @@ class Command(BaseCommand):
         contest.save()
         for game in games:
             if game:
-                game.parent_set = contest 
+                game.parent_contest = contest 
                 game.save()
         
 
