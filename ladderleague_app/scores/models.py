@@ -17,6 +17,10 @@ class Player(models.Model):
         default="Parts unknown, Planet Earth"
     )
 
+    wins = models.IntegerField(default=0)
+    losses = models.IntegerField(default=0)
+    ladder_rank = models.FloatField(default=0)
+
     def __str__(self):
         return self.short_id
 

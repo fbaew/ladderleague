@@ -1,10 +1,11 @@
 from django.core.management.base import BaseCommand
 #from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
+import django.conf
 
-
-from scores.models import Player, Game, Set
+from scores.models import Player, Game, Contest 
 import csv
+import os
 
 class Command(BaseCommand):
     args = ""
@@ -12,6 +13,7 @@ class Command(BaseCommand):
 
     def _getPlayer(self,short_id):
         try:
+            print("Retrieving player with ID: {}".format(short_id.upper()))
             player = Player.objects.get(short_id=short_id.upper())
         except ObjectDoesNotExist as e:
             print("Player {} does not exist; Creating.".format(short_id.upper()))
@@ -32,7 +34,7 @@ class Command(BaseCommand):
         print("Got scores: {}... {}".format(scores,scores == ['','']))
         pass
 
-    def _makeSet(self,row):
+    def _makeContest(self,row):
         print("processing: {}".format(row))
 
 
@@ -43,28 +45,35 @@ class Command(BaseCommand):
         game3 = self._getGame(row[7:9])
         games = [game1, game2, game3]
 
-        s = Set(player1=player1,player2=player2,set_id=int(row[0]))
+        contest = Contest(
+            challenger=player1,
+            challengee=player2,
+            contest_id=int(row[0])
+        )
 
-        s.game_count = 3
+        contest.game_count = 3
         if not game3:
-            s.game_count = 2
+            contest.game_count = 2
         if not game2:
-            s.game_count = 1
+            contest.game_count = 1
 
-        s.save()
+        contest.save()
         for game in games:
             if game:
-                game.parent_set = s
+                game.parent_set = contest 
                 game.save()
         
 
 
     def handle(self, *args, **options):
         '''here we will load and parse the file...'''
-        score_csv = '/home/gregg/devel/scores/data/scores.csv'
-        with open(score_csv,'r') as csvfile:
-            reader = csv.reader(csvfile,delimiter=',')
-            for row in reader: #Each row is a set
-               self._makeSet(row)
+        score_csv = os.path.join(django.conf.settings.DATA_DIR,'scores.csv')
+        try:
+            with open(score_csv,'r') as csvfile:
+                reader = csv.reader(csvfile,delimiter=',')
+                for row in reader: #Each row is a set
+                   self._makeContest(row)
+        except FileNotFoundError:
+            print("Couldn't open {}, aborting.".format(score_csv))
 
 
