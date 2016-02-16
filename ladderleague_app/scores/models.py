@@ -26,15 +26,14 @@ class Player(models.Model):
 
 class Contest(models.Model):
     """Represet a series of games; a single contest between two players."""
-    contest_id = models.IntegerField(primary_key=True)
-    challenger = models.ForeignKey(Player, related_name='challenger_contests')
-    challengee = models.ForeignKey(Player, related_name='challengee_contests')
+    challenger = models.ForeignKey(Player, related_name='challenger_set')
+    challengee = models.ForeignKey(Player, related_name='challengee_set')
     game_count = models.IntegerField(null=False)
 
-    #def __str__(self):
-    #    """Describe the matchup."""
-    #    return "{} vs {}".format(self.challenger, self.challengee)
-    #    #return "This is a contest"
+    def __str__(self):
+        """Describe the matchup."""
+        return "{} vs {}".format(self.challenger, self.challengee)
+        #return "This is a contest"
 
 class Game(models.Model):
     """Represent a single game (part of a larger Contest)"""
@@ -42,6 +41,6 @@ class Game(models.Model):
     challengee_score = models.IntegerField()
     parent_contest = models.ForeignKey(Contest, null=False)
 
-    #def __str__(self):
-    #    """Describe the game"""
-    #    return "{}/{}".format(self.challenger_score, self.challengee_score)
+    def __str__(self):
+        """Describe the game"""
+        return "{}/{}".format(self.challenger_score, self.challengee_score)

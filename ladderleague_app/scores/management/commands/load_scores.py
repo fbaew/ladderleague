@@ -48,7 +48,6 @@ class Command(BaseCommand):
         contest = Contest(
             challenger=player1,
             challengee=player2,
-            contest_id=int(row[0])
         )
 
         contest.game_count = 3
