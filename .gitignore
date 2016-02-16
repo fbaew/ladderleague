@@ -7,3 +7,4 @@ ladderleague_app/ladderleague_app/settings.py
 db.sqlite3
 **/.__pycache__/
 log/*
+.idea/

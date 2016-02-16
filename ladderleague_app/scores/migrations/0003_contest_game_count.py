@@ -17,5 +17,5 @@ class Migration(migrations.Migration):
             name='game_count',
             field=models.IntegerField(default=0),
             preserve_default=False,
-        ),
+        )
     ]
