@@ -1,6 +1,8 @@
 # ladderleague
 Score tracking for the ol' gnip gnop table
 
+See it online at http://pong.gregglewis.net
+
 Version 0.2
 ===========
 
