@@ -28,7 +28,6 @@ class Contest(models.Model):
     """Represet a series of games; a single contest between two players."""
     challenger = models.ForeignKey(Player, related_name='challenger_set')
     challengee = models.ForeignKey(Player, related_name='challengee_set')
-    game_count = models.IntegerField(null=False)
 
     def __str__(self):
         """Describe the matchup."""
