@@ -22,9 +22,9 @@ class Command(BaseCommand):
                 winner = contest.winner()
                 loser = contest.opponent(winner)
                 print("winner: {}".format(winner))
-                winner.regulation_wins += 1
+                winner.wins += 1
                 winner.save()
-                loser.regulation_losses += 1
+                loser.losses += 1
                 loser.save()
             except UndefinedOutcomeError:
                 pass
