@@ -4,6 +4,7 @@ from django.test import TestCase
 from scores.models import Game, Player, Contest
 from scores.exceptions import NonParticipantError, UndefinedOutcomeError
 
+
 class ContestWinnerTestCase(TestCase):
     """
     Test Contest.winner(), which should return the player who won more
@@ -20,8 +21,8 @@ class ContestWinnerTestCase(TestCase):
         )
         self.badguy = Player.objects.create(
             short_id="BADGUY",
-            first_name = "Bad",
-            last_name = "Guy"
+            first_name="Bad",
+            last_name="Guy"
         )
 
         self.contest = Contest.objects.create(
@@ -47,7 +48,6 @@ class ContestWinnerTestCase(TestCase):
         )
 
         self.assertTrue(self.contest.winner() == self.goodguy)
-
 
     def test_contested_winner(self):
         """
@@ -85,20 +85,21 @@ class ContestOutcomeTestCase(TestCase):
         """Create some generic data to test against."""
         self.goodguy = Player.objects.create(
             short_id="GOODGUY",
-            first_name = "Good",
-            last_name = "Guy"
+            first_name="Good",
+            last_name="Guy"
         )
 
         self.badguy = Player.objects.create(
             short_id="BADGUY",
-            first_name = "Bad",
-            last_name = "Guy"
+            first_name="Bad",
+            last_name="Guy"
         )
 
         self.contest = Contest.objects.create(
             challenger=self.goodguy,
             challengee=self.badguy,
         )
+
     def test_player_is_winner(self):
         """
         If the given player won the contest, return "win"
@@ -118,7 +119,6 @@ class ContestOutcomeTestCase(TestCase):
         )
         self.assertTrue(self.contest.outcome(self.goodguy) == "win")
         self.assertTrue(self.contest.outcome(self.badguy) == "loss")
-
 
     def test_player_not_in_contest(self):
         """If the player is not in the contest, throw an exception."""
@@ -145,6 +145,7 @@ class ContestOutcomeTestCase(TestCase):
         )
         self.assertTrue(self.contest.outcome(self.goodguy) == "draw")
         self.assertTrue(self.contest.outcome(self.badguy) == "draw")
+
 
 class HelperTestCase(TestCase):
     """
@@ -197,4 +198,3 @@ class HelperTestCase(TestCase):
         )
         with self.assertRaises(NonParticipantError):
             contest.opponent(player3)
-

@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from django.db.models import Q
@@ -7,12 +6,11 @@ from scores.models import Player, Game, Contest
 # Create your views here.
 
 
-
 def _leaderboard_html(request):
     all_players = Player.objects.order_by("-ladder_rank")
     leaderboard_template = loader.get_template('frontend/leaders.html')
     leaderboard_html = leaderboard_template.render(
-        {'leaders':all_players},
+        {'leaders': all_players},
         request
     )
     return leaderboard_html
@@ -31,11 +29,9 @@ def _player_summary(request, player_name):
         Q(challengee=Player.objects.get(short_id=player_name.upper()))
     ).order_by('id')
 
-    results = [{}]
-
-    results = [ {
-        'contest':x,
-        'outcome':x.outcome(Player.objects.get(short_id=player_name.upper()))
+    results = [{
+        'contest': x,
+        'outcome': x.outcome(Player.objects.get(short_id=player_name.upper()))
     } for x in contest_list]
 
     wins = 0
@@ -47,18 +43,17 @@ def _player_summary(request, player_name):
     standings = Player.objects.order_by("-ladder_rank")
     ranking = list(standings).index(player) + 1
 
-
     player = Player.objects.get(short_id=player_name.upper())
     profile_template = loader.get_template('frontend/player.html')
     profile_html = profile_template.render(
         {
-            'all_contests':contest_list,
-            'results':results,
-            'player':player,
-            'ranking':ranking,
-            'wins':wins,
-        }
-        , request
+            'all_contests': contest_list,
+            'results': results,
+            'player': player,
+            'ranking': ranking,
+            'wins': wins,
+        },
+        request
     )
     return profile_html
 
@@ -67,23 +62,24 @@ def _contest_summary_html(request, requested_contest):
     contest_summary_template = loader.get_template('frontend/contest.html')
     contest_summary_html = contest_summary_template.render(
         {
-            'contest':requested_contest,
-            'games':requested_contest.game_set.all()
+            'contest': requested_contest,
+            'games': requested_contest.game_set.all()
         },
         request
     )
     return contest_summary_html
 
+
 def index(request):
     """
     Main index view; This will be the main landing page.
-    """
-    all_players = Player.objects.order_by("-ladder_rank")
+    :param request The HttpRequest that prompted this view to be rendered.
 
+    """
     master_template = loader.get_template('frontend/index.html')
     html = master_template.render(
         {
-            'leaders':_leaderboard_html(request),
+            'leaders': _leaderboard_html(request),
         },
         request
     )
@@ -95,8 +91,8 @@ def player_overview(request, player_name):
         master_template = loader.get_template('frontend/index.html')
         master_html = master_template.render(
             {
-                'leaders':_leaderboard_html(request),
-                'profile':_player_summary(request, player_name)
+                'leaders': _leaderboard_html(request),
+                'profile': _player_summary(request, player_name)
             },
             request
         )
@@ -108,6 +104,12 @@ def player_overview(request, player_name):
 def contest_overview(request, player_name, contest_number):
     """
     Show the details of a given contest involving player_name
+
+    :param request The HttpRequest that prompted this view to be rendered.
+
+    :param  player_name The shortid (case-insensitive) of the player whose
+            profile we are looking at.
+    :param  contest_number The id number of the Contest we will display.
     """
     player_exists = False
     contest_exists = False
@@ -134,9 +136,9 @@ def contest_overview(request, player_name, contest_number):
         master_template = loader.get_template('frontend/index.html')
         master_html = master_template.render(
             {
-                'leaders':_leaderboard_html(request),
-                'profile':_player_summary(request,player_name),
-                'contest_details':_contest_summary_html(
+                'leaders': _leaderboard_html(request),
+                'profile': _player_summary(request, player_name),
+                'contest_details': _contest_summary_html(
                     request, requested_contest
                 )
             },

@@ -1,12 +1,15 @@
 """
 Custom exceptions for the scoreboard app
 """
+
+
 class NonParticipantError(Exception):
     """
     Used when an invalid player is passed to a method that expects 
     only certain players.
     """
     pass
+
 
 class UndefinedOutcomeError(Exception):
     """

@@ -3,6 +3,7 @@ from scores.exceptions import *
 
 # Create your models here.
 
+
 class Player(models.Model):
     """Represent an individual player."""
     short_id = models.CharField(
@@ -25,6 +26,7 @@ class Player(models.Model):
     def __str__(self):
         return self.short_id
 
+
 class Contest(models.Model):
     """Represet a series of games; a single contest between two players."""
     challenger = models.ForeignKey(Player, related_name='challenger_set')
@@ -33,7 +35,6 @@ class Contest(models.Model):
     def __str__(self):
         """Describe the matchup."""
         return "{} vs {}".format(self.challenger, self.challengee)
-        #return "This is a contest"
 
     def winner(self):
         """
@@ -52,7 +53,7 @@ class Contest(models.Model):
             return self.challenger
         elif challengee_wins > challenger_wins:
             return self.challengee
-        else: #in the event of a draw:
+        else:
             raise UndefinedOutcomeError
 
     def outcome(self, player):
@@ -74,6 +75,7 @@ class Contest(models.Model):
             return self.challenger
         else:
             raise NonParticipantError
+
 
 class Game(models.Model):
     """Represent a single game (part of a larger Contest)"""
