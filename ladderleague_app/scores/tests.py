@@ -67,6 +67,12 @@ class ContestWinnerTestCase(TestCase):
             parent_contest=self.contest
         )
 
+        game3 = Game.objects.create(
+            challenger_score=21,
+            challengee_score=19,
+            parent_contest=self.contest
+        )
+
         self.assertTrue(self.contest.winner() == self.goodguy)
 
 

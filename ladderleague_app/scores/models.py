@@ -1,4 +1,5 @@
 from django.db import models
+from scores.exceptions import *
 
 # Create your models here.
 
@@ -33,6 +34,38 @@ class Contest(models.Model):
         """Describe the matchup."""
         return "{} vs {}".format(self.challenger, self.challengee)
         #return "This is a contest"
+
+    def winner(self):
+        """
+        Return the player that won this contest.
+        :return: An instance of Player representing the player who won.
+        """
+        games = self.game_set.all()
+        challenger_wins = 0
+        challengee_wins = 0
+        for game in games:
+            if game.challenger_score > game.challengee_score:
+                challenger_wins += 1
+            elif game.challengee_score > game.challenger_score:
+                challengee_wins += 1
+        if challenger_wins > challengee_wins:
+            return self.challenger
+        elif challengee_wins > challenger_wins:
+            return self.challengee
+        else: #in the event of a draw:
+            raise UndefinedOutcomeError
+
+    def outcome(self,player):
+        if self.challenger != player and self.challengee != player:
+            raise NonParticipantError
+
+        try:
+            if self.winner() == player:
+                return "win"
+            else:
+                return "loss"
+        except UndefinedOutcomeError:
+            return "draw"
 
 class Game(models.Model):
     """Represent a single game (part of a larger Contest)"""
