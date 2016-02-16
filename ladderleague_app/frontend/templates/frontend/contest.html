@@ -1,0 +1,14 @@
+    <div id="set">
+    <h2>Set {{contest.id}}, {{contest.challenger.first_name}}/{{contest.challengee.first_name}}</h2>
+
+    {% for game in games %}
+    <span>Game {{forloop.counter}}</span>
+    {% endfor %}
+
+    <br>
+    {% for game in games %}
+    <span id="game{{forloop.counter}}">
+        {{game.challenger_score}} / {{game.challengee_score}}
+    </span>
+    {% endfor %}
+    </div>

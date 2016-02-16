@@ -1,0 +1,32 @@
+{% load staticfiles %}
+    <div id="player">
+        <h1>{{player.first_name}} {% if player.handle %}"{{player.handle}}"{% endif %} {{player.last_name}}</h1>
+        <img src="{% static "frontend/img/pong.jpg" %}" class="profilepic">
+        <table class="vital-stats">
+            <tbody>
+                <tr><td>Hometown:</td><td>{{player.hometown}}</td></tr>
+                <tr><td>Wins:</td><td>{{wins}}</td></tr>
+                <tr><td>Ladder Rating:</td><td>{{player.ladder_rank}}</td></tr>
+                <tr><td>Ladder Position:</td><td>{{ranking}}</td></tr>
+
+            </tbody>
+        </table>
+
+        <h2>Play History</h2>
+
+        <table class="history">
+        <thead>
+            <tr><th>Set #</th><th>Matchup</th><th>Outcome</th></tr>
+        </thead>
+        <tbody>
+
+        {% for result in results %}
+        <tr>
+        <td><a href="/player/{{player.first_name}}/{{result.contest.id}}">{{result.contest.id}}</a></td>
+        <td><a href="/player/{{player.first_name}}/{{result.contest.id}}">{{result.contest.challenger.first_name}} vs. {{result.contest.challengee.first_name}}</a></td>
+        <td><a href="/player/{{player.first_name}}/{{result.contest.id}}">{{result.outcome}}</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>

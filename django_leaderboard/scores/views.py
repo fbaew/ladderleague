@@ -1,22 +1,13 @@
+"""
+Views for scoreboard app
+"""
 from django.shortcuts import render
 from django.http import HttpResponse
+from scores.models import Player, Game, Set
 from django.template import loader
 from django.db.models import Q
-from scores.models import Player, Game, Contest
 
 # Create your views here.
-
-
-
-def _leaderboard_html(request):
-    all_players = Player.objects.order_by("-ladder_rank")
-    leaderboard_template = loader.get_template('frontend/leaders.html')
-    leaderboard_html = leaderboard_template.render(
-        {'leaders':all_players},
-        request
-    )
-    return leaderboard_html
-
 
 def _player_summary(request, player_name):
     """
@@ -26,17 +17,17 @@ def _player_summary(request, player_name):
         Set History
     """
 
-    contest_list = Contest.objects.filter(
-        Q(challenger=Player.objects.get(short_id=player_name.upper())) |
-        Q(challengee=Player.objects.get(short_id=player_name.upper()))
-    ).order_by('id')
+    set_list = Set.objects.filter(
+        Q(player1=Player.objects.get(short_id=player_name.upper())) |
+        Q(player2=Player.objects.get(short_id=player_name.upper()))
+    ).order_by('set_id')
 
     results = [{}]
 
     results = [ {
-        'contest':x,
+        'set':x,
         'outcome':x.outcome(Player.objects.get(short_id=player_name.upper()))
-    } for x in contest_list]
+    } for x in set_list]
 
     wins = 0
     for result in results:
@@ -44,15 +35,15 @@ def _player_summary(request, player_name):
             wins += 1
     player = Player.objects.get(short_id=player_name.upper())
 
-    standings = Player.objects.order_by("-ladder_rank")
+    standings = Player.objects.order_by("-elo_rating")
     ranking = list(standings).index(player) + 1
 
 
     player = Player.objects.get(short_id=player_name.upper())
-    profile_template = loader.get_template('frontend/player.html')
+    profile_template = loader.get_template('scores/player.html')
     profile_html = profile_template.render(
         {
-            'all_contests':contest_list,
+            'all_sets':set_list,
             'results':results,
             'player':player,
             'ranking':ranking,
@@ -62,25 +53,34 @@ def _player_summary(request, player_name):
     )
     return profile_html
 
+def _leaderboard_html(request):
+    all_players = Player.objects.order_by("-elo_rating")
+    leaderboard_template = loader.get_template('scores/leaders.html')
+    leaderboard_html = leaderboard_template.render(
+        {'leaders':all_players},
+        request
+    )
+    return leaderboard_html
 
-def _contest_summary_html(request, requested_contest):
-    contest_summary_template = loader.get_template('frontend/contest.html')
-    contest_summary_html = contest_summary_template.render(
+def _set_summary_html(request, requested_set):
+    set_summary_template = loader.get_template('scores/set.html')
+    set_summary_html = set_summary_template.render(
         {
-            'contest':requested_contest,
-            'games':requested_contest.game_set.all()
+            'single_set':requested_set,
+            'games':requested_set.game_set.all()
         },
         request
     )
-    return contest_summary_html
+    return set_summary_html
+
 
 def index(request):
     """
     Main index view; This will be the main landing page.
     """
-    all_players = Player.objects.order_by("-ladder_rank")
+    all_players = Player.objects.order_by("-elo_rating")
 
-    master_template = loader.get_template('frontend/index.html')
+    master_template = loader.get_template('scores/landing.html')
     html = master_template.render(
         {
             'leaders':_leaderboard_html(request),
@@ -92,7 +92,7 @@ def index(request):
 
 def player_overview(request, player_name):
     if Player.objects.filter(short_id=player_name.upper()).exists():
-        master_template = loader.get_template('frontend/index.html')
+        master_template = loader.get_template('scores/landing.html')
         master_html = master_template.render(
             {
                 'leaders':_leaderboard_html(request),
@@ -104,41 +104,31 @@ def player_overview(request, player_name):
     else:
         return HttpResponse("Sorry, no such player")
 
-
-def contest_overview(request, player_name, contest_number):
+def set_overview(request, player_name, set_number):
     """
-    Show the details of a given contest involving player_name
+    Show the details of a given set involving player_name
     """
     player_exists = False
-    contest_exists = False
+    set_exists = False
     if Player.objects.filter(short_id=player_name.upper()).exists():
         player_exists = True
-    if Contest.objects.filter(id=contest_number).exists():
-        contest_exists = True
+    if Set.objects.filter(set_id=set_number).exists():
+        set_exists = True
 
-    if not player_exists or not contest_exists:
+    if not player_exists or not set_exists:
         return HttpResponse("invalid player/set combination")
-    requested_contest = Contest.objects.filter(id=contest_number)[0]
+    requested_set = Set.objects.filter(set_id=set_number)[0]
     player = Player.objects.filter(short_id=player_name.upper())[0]
 
-    if not (
-        requested_contest.challenger == player or
-        requested_contest.challengee == player
-    ):
-        return HttpResponse(
-            "That player did not play in that set. {}".format(
-               requested_contest
-            )
-        )
+    if not (requested_set.player1 == player or requested_set.player2 == player):
+        return HttpResponse("That player is not in that set. {}".format(requested_set))
     else:
-        master_template = loader.get_template('frontend/index.html')
+        master_template = loader.get_template('scores/landing.html')
         master_html = master_template.render(
             {
                 'leaders':_leaderboard_html(request),
                 'profile':_player_summary(request,player_name),
-                'contest_details':_contest_summary_html(
-                    request, requested_contest
-                )
+                'single_set':_set_summary_html(request, requested_set)
             },
             request
         )

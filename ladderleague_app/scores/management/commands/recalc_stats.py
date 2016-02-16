@@ -31,7 +31,7 @@ class Command(BaseCommand):
 
         for player in Player.objects.all():
             player.ladder_rank = round(
-                (player.wins+1.0)/(player.wins+1.0),
+                (player.wins+1.0)/(player.losses+1.0),
                 2
             )
             player.save()
