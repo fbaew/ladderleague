@@ -146,3 +146,55 @@ class ContestOutcomeTestCase(TestCase):
         self.assertTrue(self.contest.outcome(self.goodguy) == "draw")
         self.assertTrue(self.contest.outcome(self.badguy) == "draw")
 
+class HelperTestCase(TestCase):
+    """
+    Tests for things that don't really fit anywhere else.
+    """
+    def test_contest_opponent(self):
+        """
+        Given a Contest and a Player, we should return a Player representing
+        the given Player's opponent in the given Contest.
+        """
+        player1 = Player.objects.create(
+            short_id="PLAYER1",
+            first_name="Player",
+            last_name="One"
+        )
+        player2 = Player.objects.create(
+            short_id="PLAYER2",
+            first_name="Player",
+            last_name="Two"
+        )
+        contest = Contest.objects.create(
+            challenger=player1,
+            challengee=player2,
+        )
+        self.assertTrue(contest.opponent(player1) == player2)
+        self.assertTrue(contest.opponent(player2) == player1)
+
+    def test_contest_opponent_nonparticipant(self):
+        """
+        If the given player was not in this contest, raise an exception.
+        """
+        player1 = Player.objects.create(
+            short_id="PLAYER1",
+            first_name="Player",
+            last_name="One"
+        )
+        player2 = Player.objects.create(
+            short_id="PLAYER2",
+            first_name="Player",
+            last_name="Two"
+        )
+        player3 = Player.objects.create(
+            short_id="PLAYER3",
+            first_name="Player",
+            last_name="Three"
+        )
+        contest = Contest.objects.create(
+            challenger=player1,
+            challengee=player2,
+        )
+        with self.assertRaises(NonParticipantError):
+            contest.opponent(player3)
+

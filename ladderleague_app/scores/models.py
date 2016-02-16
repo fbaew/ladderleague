@@ -55,7 +55,7 @@ class Contest(models.Model):
         else: #in the event of a draw:
             raise UndefinedOutcomeError
 
-    def outcome(self,player):
+    def outcome(self, player):
         if self.challenger != player and self.challengee != player:
             raise NonParticipantError
 
@@ -66,6 +66,14 @@ class Contest(models.Model):
                 return "loss"
         except UndefinedOutcomeError:
             return "draw"
+
+    def opponent(self, player):
+        if player == self.challenger:
+            return self.challengee
+        elif player == self.challengee:
+            return self.challenger
+        else:
+            raise NonParticipantError
 
 class Game(models.Model):
     """Represent a single game (part of a larger Contest)"""
