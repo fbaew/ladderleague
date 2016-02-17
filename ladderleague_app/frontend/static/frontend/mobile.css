@@ -127,3 +127,16 @@ h2 {
     margin-left:5%;
     margin-right:5%;
 }
+
+#notice {
+    text-align:center;
+}
+
+#notice h1 {
+    font-size:100pt;
+    background-color:#6f3;
+}
+#notice h2 {
+    font-size:60pt;
+    background-color:#6f3;
+}
