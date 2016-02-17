@@ -24,4 +24,4 @@ urlpatterns = [
     url(r'^debug/players/', scores.player_list, name="players"),
     url(r'^player/', include('frontend.urls')),
     url(r'^$', frontendviews.index, name="index")
-]
+

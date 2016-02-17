@@ -1,0 +1,24 @@
+"""Test suite for scores package"""
+
+from django.test import TestCase
+from scores.models import Game, Player, Contest
+from scores.exceptions import NonParticipantError, UndefinedOutcomeError
+
+class OutcomeTestCase(TestCase):
+    """
+    Test Contest.outcome(Player), which should return "win", "loss", or 
+    "draw" for a given player.
+    """
+    def setUp(self):
+        """Make some reuseable components."""
+        pass
+
+    def test_player_is_winner(self):
+        """If the given player won the contest, return "win" """
+        self.assertTrue(False)
+
+    def test_player_is_loser(self):
+        """If the given player lost the contest, return "loss" """
+        self.assertTrue(False)
+
+    def test_pl
