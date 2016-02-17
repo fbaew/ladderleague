@@ -1,8 +1,8 @@
 {% load staticfiles %}
-    <div id="player">
+    <div id="player"><a name="player"></a>
         <h1>{{player.first_name}} {% if player.handle %}"{{player.handle}}"{% endif %} {{player.last_name}}</h1>
         <img src="{% static "frontend/img/pong.jpg" %}" class="profilepic">
-        <table class="vital-stats">
+        <table id="vital-stats">
             <tbody>
                 <tr><td>Hometown:</td><td>{{player.hometown}}</td></tr>
                 <tr><td>Wins:</td><td>{{wins}}</td></tr>
@@ -14,7 +14,7 @@
 
         <h2>Play History</h2>
 
-        <table class="history">
+        <table id="history"><a name="history"></a>
         <thead>
             <tr><th>Set #</th><th>Matchup</th><th>Outcome</th></tr>
         </thead>
@@ -22,9 +22,9 @@
 
         {% for result in results %}
         <tr>
-        <td><a href="/{{player.first_name}}/{{result.contest.id}}">{{result.contest.id}}</a></td>
-        <td><a href="/{{player.first_name}}/{{result.contest.id}}">{{result.contest.challenger.first_name}} vs. {{result.contest.challengee.first_name}}</a></td>
-        <td><a href="/{{player.first_name}}/{{result.contest.id}}">{{result.outcome}}</a></td>
+        <td><a href="/{{player.first_name}}/{{result.contest.id}}#set">{{result.contest.id}}</a></td>
+        <td><a href="/{{player.first_name}}/{{result.contest.id}}#set">{{result.contest.challenger.first_name}} vs. {{result.contest.challengee.first_name}}</a></td>
+        <td><a href="/{{player.first_name}}/{{result.contest.id}}#set">{{result.outcome}}</a></td>
         </tr>
         {% endfor %}
         </tbody>

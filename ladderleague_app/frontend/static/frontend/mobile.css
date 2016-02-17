@@ -1,0 +1,129 @@
+body {
+    margin:0;
+    padding:0;
+}
+
+h2 {
+    font-size:100pt;
+    background:yellow;
+}
+
+#titlebar {
+    font-size:120pt;
+    width:100%;
+    text-align:center;
+}
+#navigation {
+    display:none;
+}
+#container {
+    padding:0;
+    margin:0;
+}
+#content {
+    padding-bottom:500px;
+}
+#standings {
+    width:100%;
+    text-align:center;
+    padding:0;
+    margin:0;
+}
+
+
+#standings > ol {
+    list-style-type:none;
+}
+
+
+
+#standings > ol > li {
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+#standings ul {
+    list-style:none;
+}
+
+#standings a, #standings a:visited {
+    text-decoration:none;
+    font-size:60pt;
+    color:#000;
+}
+
+#player > img {
+    width:100%;
+    display:none;
+}
+
+#vital-stats {
+    display:none;
+}
+
+
+
+#player {
+    margin-top:50px;
+    width:100%;
+    text-align:center;
+}
+
+#player h1 {
+    font-size:80pt;
+    text-align:center;
+    background-color:yellow;
+}
+
+#player h2 {
+    font-size:60pt;
+    text-align:center;
+    background-color:orange;
+}
+
+
+#history {
+    width:95%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:100px;
+}
+
+#history tr {
+    text-align:center;
+    font-size:40pt;
+}
+
+#history td {
+    padding-top:30px;
+}
+
+#history th, #history td {
+    display:none
+}
+
+#history th+th, #history td+td {
+    display:table-cell;
+}
+
+#history a, #history a:visited {
+    text-decoration:none;
+    color:#000;
+    display:block;
+}
+
+#set {
+    width:99%;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+}
+
+#set h2 {
+    font-size:40pt;
+}
+
+#set span {
+    margin-left:5%;
+    margin-right:5%;
+}

@@ -25,6 +25,10 @@ body {
     height:95%;
 }
 
+#navigation {
+
+}
+
 #content {
     width:80%;
 }
@@ -77,17 +81,17 @@ body {
     margin-bottom:40px;
 }
 
-#player .vital-stats {
+#vital-stats {
     float:left;
     text-align:center;
     font-size:11pt;
 }
 
-#player .vital-stats td {
+#vital-stats td {
     text-align:right;
 }
 
-#player .vital-stats td+td {
+#vital-stats td+td {
     text-align:left;
 }
 
@@ -96,23 +100,23 @@ body {
     text-align:center;
 }
 
-#player .history {
+#history {
     clear:both;
     width:100%;
     border:1px #000 solid;
     text-align:center;
     border-collapse:collapse;
 }
-#player .history thead {
+#history thead {
     background-color:#000;
     color:#fff;
 }
 
-#player .history tbody tr:hover {
+#history tbody tr:hover {
     background-color:#ff6;
 }
 
-#player .history a, .history a:visited {
+#history a, #history a:visited {
     text-decoration:none;
     display:block;
     color:#000;
