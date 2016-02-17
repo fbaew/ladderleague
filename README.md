@@ -1,7 +1,9 @@
 # ladderleague
 Score tracking for the ol' gnip gnop table
 
-Version 0.1
+See it online at http://pong.gregglewis.net
+
+Version 0.2
 ===========
 
 This is a little app designed to track statistics about the various 
@@ -22,9 +24,13 @@ Features
 
 Roadmap
 =======
+* Views for Mobile
 * Online score entry
+* More stats
+   * Ladder rank as a time series
+   * "Grudge" view, showing stats for a particular matchup
 * Challenge Scheduling
-* Email integration
+   * Email integration
 
 After an initial free-for-all seeding period, regulation games will be 
 restricted to official ladder league challenge rules, those being:
