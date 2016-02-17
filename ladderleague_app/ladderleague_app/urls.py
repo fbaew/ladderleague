@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^debug/players/', scores.player_list, name="players"),
     url(r'^player/', include('frontend.urls')),
-    url(r'^$', frontendviews.index, name="index")
-
+    url(r'^$', frontendviews.index, name="index"),
+]
