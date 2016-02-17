@@ -12,5 +12,6 @@ urlpatterns = [
         views.player_overview,
         name='player_overview'
     ),
+    url(r'^$', views.index, name="index"),
 ]
 

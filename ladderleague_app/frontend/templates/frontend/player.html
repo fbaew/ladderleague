@@ -22,9 +22,9 @@
 
         {% for result in results %}
         <tr>
-        <td><a href="/player/{{player.first_name}}/{{result.contest.id}}">{{result.contest.id}}</a></td>
-        <td><a href="/player/{{player.first_name}}/{{result.contest.id}}">{{result.contest.challenger.first_name}} vs. {{result.contest.challengee.first_name}}</a></td>
-        <td><a href="/player/{{player.first_name}}/{{result.contest.id}}">{{result.outcome}}</a></td>
+        <td><a href="/{{player.first_name}}/{{result.contest.id}}">{{result.contest.id}}</a></td>
+        <td><a href="/{{player.first_name}}/{{result.contest.id}}">{{result.contest.challenger.first_name}} vs. {{result.contest.challengee.first_name}}</a></td>
+        <td><a href="/{{player.first_name}}/{{result.contest.id}}">{{result.outcome}}</a></td>
         </tr>
         {% endfor %}
         </tbody>

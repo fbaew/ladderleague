@@ -4,7 +4,7 @@
 <h2>Standings</h2>
 <ol>
     {% for player in leaders %}
-            <li><a href="/player/{{player.first_name}}">{{player.first_name}}</a></li>
+            <li><a href="/{{player.first_name}}">{{player.first_name}}</a></li>
     {% endfor %}
 </ol>
 
