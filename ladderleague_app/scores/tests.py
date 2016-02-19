@@ -3,7 +3,9 @@
 from django.test import TestCase
 from scores.models import Game, Player, Contest
 from scores.exceptions import NonParticipantError, UndefinedOutcomeError
-
+from scores.management.commands import load_users
+import django.conf
+import csv, os
 
 class ContestWinnerTestCase(TestCase):
     """
@@ -147,9 +149,9 @@ class ContestOutcomeTestCase(TestCase):
         self.assertTrue(self.contest.outcome(self.badguy) == "draw")
 
 
-class HelperTestCase(TestCase):
+class OpponentTestCase(TestCase):
     """
-    Tests for things that don't really fit anywhere else.
+    Test the Contest.opponent(Player) function
     """
     def test_contest_opponent(self):
         """
@@ -198,3 +200,34 @@ class HelperTestCase(TestCase):
         )
         with self.assertRaises(NonParticipantError):
             contest.opponent(player3)
+
+class CSVImportTestCase(TestCase):
+    """
+    Test the assorted utilities for populating the db
+    """
+    def test_update_non_existing_user(self):
+        util = load_users.Command()
+        input_csv = os.path.join(
+            django.conf.settings.DATA_DIR,
+            "testdata",
+            "single_player.csv"
+        )
+
+        self.assertTrue(len(Player.objects.all()) == 0)
+        try:
+            with open(input_csv, 'r') as csvfile:
+                reader = csv.reader(csvfile,delimiter=',')
+                for row in reader:
+                    util._updateUser(row)
+        except FileNotFoundError:
+            print("Couldn't open {}; test failed.".format(input_csv))
+
+
+        test_player = Player.objects.get(short_id="TESTUSER")
+        self.assertTrue(len(Player.objects.all()) == 1)
+        self.assertTrue(test_player.first_name == "Mister")
+        self.assertTrue(test_player.last_name == "White")
+        self.assertTrue(test_player.handle == "Jabba the Hutt")
+        self.assertTrue(test_player.hometown == "The Sun, Space")
+
+
