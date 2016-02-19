@@ -205,24 +205,26 @@ class CSVImportTestCase(TestCase):
     """
     Test the assorted utilities for populating the db
     """
-    def test_update_non_existing_user(self):
+    def update_user_helper(self, filename):
         util = load_users.Command()
         input_csv = os.path.join(
             django.conf.settings.DATA_DIR,
             "testdata",
-            "single_player.csv"
+            filename
         )
 
-        self.assertTrue(len(Player.objects.all()) == 0)
         try:
             with open(input_csv, 'r') as csvfile:
                 reader = csv.reader(csvfile,delimiter=',')
                 for row in reader:
-                    util._updateUser(row)
+                   util._update_user(row)
+
         except FileNotFoundError:
             print("Couldn't open {}; test failed.".format(input_csv))
 
-
+    def test_create_user(self):
+        self.assertTrue(len(Player.objects.all()) == 0)
+        self.update_user_helper("single_player.csv")
         test_player = Player.objects.get(short_id="TESTUSER")
         self.assertTrue(len(Player.objects.all()) == 1)
         self.assertTrue(test_player.first_name == "Mister")

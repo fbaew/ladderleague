@@ -11,7 +11,7 @@ class Command(BaseCommand):
     args = ""
     help = "Load players.csv from the data directory. Updates players with whatever is found there"
 
-    def _updateUser(self, row):
+    def _update_user(self, row):
         try:
             player = Player.objects.get(short_id=row[0])
         except ObjectDoesNotExist:
