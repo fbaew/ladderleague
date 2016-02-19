@@ -240,7 +240,6 @@ class CSVImportTestCase(TestCase):
         n.b. this shouldn't have
         :return:
         """
-
         self.update_user_helper("duplicate_player.csv")
         test_player = Player.objects.get(short_id="TESTUSER")
         self.assertTrue(test_player.first_name == "Christopher")
@@ -248,4 +247,6 @@ class CSVImportTestCase(TestCase):
         self.assertTrue(test_player.handle == "Doc")
         self.assertTrue(test_player.hometown == "Stamford, Connecticut")
 
-
+    def test_malformed_user_file_missing_field(self):
+        with self.assertRaises(IndexError):
+            self.update_user_helper("malformed_file-missing_field.csv")
