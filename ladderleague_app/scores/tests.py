@@ -227,9 +227,25 @@ class CSVImportTestCase(TestCase):
         self.update_user_helper("single_player.csv")
         test_player = Player.objects.get(short_id="TESTUSER")
         self.assertTrue(len(Player.objects.all()) == 1)
-        self.assertTrue(test_player.first_name == "Mister")
-        self.assertTrue(test_player.last_name == "White")
-        self.assertTrue(test_player.handle == "Jabba the Hutt")
-        self.assertTrue(test_player.hometown == "The Sun, Space")
+        self.assertTrue(test_player.first_name == "Christopher")
+        self.assertTrue(test_player.last_name == "Lloyd")
+        self.assertTrue(test_player.handle == "Professor Plum")
+        self.assertTrue(test_player.hometown == "Stamford, Connecticut")
+
+    def test_overwrite_user(self):
+        """
+        Tests the case where a user appears more than once in the CSV.
+        Expected behaviour is that the existing user should be updated.
+
+        n.b. this shouldn't have
+        :return:
+        """
+
+        self.update_user_helper("duplicate_player.csv")
+        test_player = Player.objects.get(short_id="TESTUSER")
+        self.assertTrue(test_player.first_name == "Christopher")
+        self.assertTrue(test_player.last_name == "Lloyd")
+        self.assertTrue(test_player.handle == "Doc")
+        self.assertTrue(test_player.hometown == "Stamford, Connecticut")
 
 
