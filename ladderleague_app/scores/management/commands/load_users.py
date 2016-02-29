@@ -22,7 +22,7 @@ class Command(BaseCommand):
         player.last_name = row[2]
         if row[3] != "":
             player.handle = row[3]
-        player.hometown = row[4] + ", " + row[5]
+        player.origin = row[4] + ", " + row[5]
         player.save()
 
 
