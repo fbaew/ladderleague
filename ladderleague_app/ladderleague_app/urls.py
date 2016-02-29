@@ -12,6 +12,10 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
+
+Debug style url...
+
+    url(r'^debug/players/', scores.player_list, name="players"),
 """
 from django.conf.urls import url, include
 from django.contrib import admin
@@ -21,6 +25,5 @@ import frontend.views as frontendviews
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^debug/players/', scores.player_list, name="players"),
     url(r'^', include('frontend.urls')),
 ]

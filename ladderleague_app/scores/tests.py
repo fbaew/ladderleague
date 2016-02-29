@@ -230,7 +230,7 @@ class CSVImportTestCase(TestCase):
         self.assertTrue(test_player.first_name == "Christopher")
         self.assertTrue(test_player.last_name == "Lloyd")
         self.assertTrue(test_player.handle == "Professor Plum")
-        self.assertTrue(test_player.hometown == "Stamford, Connecticut")
+        self.assertTrue(test_player.origin == "Stamford, Connecticut")
 
     def test_overwrite_user(self):
         """
@@ -245,7 +245,7 @@ class CSVImportTestCase(TestCase):
         self.assertTrue(test_player.first_name == "Christopher")
         self.assertTrue(test_player.last_name == "Lloyd")
         self.assertTrue(test_player.handle == "Doc")
-        self.assertTrue(test_player.hometown == "Stamford, Connecticut")
+        self.assertTrue(test_player.origin == "Stamford, Connecticut")
 
     def test_malformed_user_file_missing_field(self):
         with self.assertRaises(IndexError):

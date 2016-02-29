@@ -33,7 +33,7 @@ class Command(BaseCommand):
             with open(player_csv,'r') as csvfile:
                 reader = csv.reader(csvfile,delimiter=',')
                 for row in reader: #Each row is a set
-                   self._updateUser(row)
+                   self._update_user(row)
         except FileNotFoundError:
             print("Couldn't open {}, aborting.".format(player_csv))
 

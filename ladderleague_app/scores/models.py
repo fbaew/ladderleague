@@ -14,7 +14,7 @@ class Player(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     handle = models.CharField(max_length=100)
-    hometown = models.CharField(
+    origin = models.CharField(
         max_length=100,
         default="Parts unknown, Planet Earth"
     )
